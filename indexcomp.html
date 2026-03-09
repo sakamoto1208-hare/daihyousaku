@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MAGICLACE2.0 キャンペーンLP</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="js/common.js" defer></script>
+</head>
+<body>
+  <!-- ハンバーガーメニュー -->
+<div class="hamburger">
+  <i class="fa-solid fa-bars"></i>
+</div>
+<!-- SPナビ -->
+<nav class="sp-nav">
+  <ul>
+    <li><a href="#booth-about"><i class="fa-solid fa-shoe-prints"></i> マジックレース2.0とは</a></li>
+    <li><a href="#booth"><i class="fa-solid fa-map-location-dot"></i> 体験ブース案内</a></li>
+    <li><a href="#booth-search"><i class="fa-solid fa-magnifying-glass"></i> 体験ブースを検索</a></li>
+    <li><a href="#campaign"><i class="fa-brands fa-hashtag"></i> SNS投稿キャンペーン</a></li>
+  </ul>
+</nav>
+  <!-- Hero Section -->
+  <section class="reveal" id="hero">
+    <div class="hero-img"></div>
+    <h1>進化した結び、MAGICLACE2.0を体感せよ。</h1>
+    <p>ブースでの体験をSNSにシェアすると限定特典がもらえるキャンペーン開催中</p>
+    <div>
+      <a class="btn btn-primary" href="#booth-search">体験ブースを探す</a>
+      <a href="../tool_b/index_b.html" class="btn btn-outline">投稿テンプレで参加</a>
+    </div>
+  </section>
+
+  <!-- 商品紹介 -->
+  <section class="reveal" id="booth-about">
+    <h2>マジックレース2.0とは</h2>
+<!--==ぶんりょう多い一旦保留
+    <h4>こんな場面ありませんか？</h4>
+  <p>
+    ランニングなどの運動時・部活動時・通勤通学時に…<br>
+    結び直しが多い<br>
+    動きに集中したい
+  </p>
+  -->
+
+    <p>圧倒的なほどけにくさ、フィット感の向上、疲れにくくなるなど。<br>独自のテンション(伸縮性)可変特許技術を搭載！<br>結び目部分： 伸びやすい<br>中足部分： 伸びにくい<br>前足部分： とても伸びやすい</p>
+
+    <div class="compare-wrap">
+      <div>
+        <div class="compare-box" tabindex="0">
+          <img src="./img/magiclace.png" class="base-img" alt="MAGICLACE" data-hover-src="./img/magiclace_k1.png" class="hover-img">
+        </div>
+        <p>MAGICLACE</p>
+      </div>
+      <div>
+        <div class="compare-box" tabindex="0">
+          <img src="./img/magiclace2.png" alt="MAGICLACE2.0" data-hover-src="./img/magiclace2.0_k1.png" class="hover-img">
+        </div>
+        <p>MAGICLACE2.0</p>
+      </div>
+    </div>
+        <p style="font-size:0.8em; color:#aaa;">
+        ※触れると構造イメージが切り替わります
+        </p>
+    <div class="card-wrap">
+      <div class="card">
+        <i class="fa-solid fa-infinity"></i>
+        <p>しっかり結べてほどけにくい</p>
+        <div class="card-panel">
+          グリップ糸、凹凸構造を用いて強い摩擦が生じほどけにくい。ほどける心配が減り、安心してスポーツに集中できる。
+        </div>
+      </div>
+      <div class="card">
+        <i class="fa-solid fa-shoe-prints"></i>
+        <p>足にフィットしズレない</p>
+        <div class="card-panel">シューズと足をしっかり固定。激しい動きにもズレにくく圧倒的にフィット感が向上</div>
+      </div>
+      <div class="card">
+        <i class="fa-solid fa-person-running"></i>
+        <p>踏み込み、蹴り出しやすい</p>
+        <div class="card-panel">紐が足に合わせて伸びる。踏み込みや蹴り出しが今まで以上にしやすくなり足のチカラを最大限に引き出します。
+        </div>
+      </div>
+      
+    </div>
+  </section>
+  <!-- 体験ブース案内（検索前の説明） -->
+  <section class="reveal" id="booth">
+    <h2>体験ブース開催中！</h2>
+    <p>実際に試して、そのフィット感を体感。SNS投稿で限定特典をゲットしよう!</p>
+    <a class="btn btn-primary" href="#booth-search">開催店舗を検索する</a>
+  </section>
+
+  <!-- 体験ブース検索 -->
+  <section class="reveal" id="booth-search">
+  <h2>体験ブース検索</h2>
+  <p>地域を選択して開催店舗をチェック！</p>
+
+  <!-- ▼ 検索UI（幅を狭くするのはここだけ） -->
+  <div class="booth-search-form">
+    <label for="region">地方を選択</label>
+    <select id="region">
+      <option value="">選択してください</option>
+      <option value="北海道">北海道</option>
+      <option value="東北">東北</option>
+      <option value="関東">関東</option>
+      <option value="中部">中部</option>
+      <option value="近畿">近畿</option>
+      <option value="中国">中国</option>
+      <option value="四国">四国</option>
+      <option value="九州・沖縄">九州・沖縄</option>
+    </select>
+
+    <label for="pref">都道府県を選択</label>
+    <select id="pref">
+      <option value="">地域を先に選択してください</option>
+    </select>
+
+    <button class="btn btn-primary" id="booth-search-btn" type="button">
+      店舗を検索
+    </button>
+  </div>
+
+  <!-- ▼ 検索結果表示エリア（※300px制限の外！） -->
+  <div id="store-results" class="store-results" aria-live="polite"></div>
+
+  <p class="search-note">
+    ※本検索機能はデモ表示です
+  </p>
+</section>
+
+  <!-- SNS投稿キャンペーン -->
+  <section class="reveal" id="campaign">
+    <h2>#MAGICLACE2.0体験 をシェア！</h2>
+    <p>キャンペーン参加方法</p>
+    <div style="text-align:left; display:inline-block; margin-top:10px;">
+      <p>1. ブースまたはご購入していただいたMAGICLACE2.0を試す</p>
+      <p>2. 写真を撮ってSNSに投稿</p>
+      <p>3. 投稿画面をブース内スタッフに見せて特典GET!</p>
+      <p>
+        ※ブース外の投稿につきましては、投稿ガイド詳細からご確認ください。
+      </p>
+    </div>
+    <div style="text-align:center; width:100%; margin-top:20px;">
+      <a href="../tool_b/index_b.html" class="btn btn-outline" style="display:inline-block; margin:auto;">投稿ガイド詳細を見る</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+  <div class="footer-inner">
+    <div class="sns-icons">
+      <span class="sns-icon-circle"><a href="https://www.facebook.com/twinscorp199904/"><i class="fa-brands fa-facebook"></i></a></span>
+      <span class="sns-icon-circle"><a href="https://www.instagram.com/twins_corporation/"><i class="fa-brands fa-instagram"></i></a></span>
+      <span class="sns-icon-circle"><a href="https://www.youtube.com/@twinscorp7"><i class="fa-brands fa-youtube"></i></a></span>
+      <span class="sns-icon-circle"><a href="https://x.com/twins_corp"><i class="fa-brands fa-x-twitter"></i></a></span>
+      <span class="sns-icon-circle"><a href="https://page.line.me/064ohxjr?oat_content=url&openQrModal=true"><i class="fa-brands fa-line"></i></a></span>
+    </div>
+
+    <div class="footer-links">
+      <a href="https://www.caterpy.com/">CATERPY 公式サイトに戻る</a>
+      <a href="https://shop.twins-corp.com/?srsltid=AfmBOoqqc8bJb3aUIA6nK317BuqI8c_SM6AA93a0HXmpJydzY6b40FiN">TWINS ONLINE SHOPへ</a><br>
+      <a href="#">トップに戻る</a>
+    </div>
+
+    <div class="footer-sub-links">
+      <a href="#">利用規約</a>
+      <a href="#">プライバシーポリシー</a>
+      <a href="#">お問い合わせ</a>
+    </div>
+
+    <p class="copyright">CATERPY | MAGICLACE2.0 © 2025</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,329 +1,243 @@
-    /* =========================================================
-    多言語テキスト（日本語 / 英語 / 中国語 / 韓国語）
-    ========================================================= */
-    const translations = {
-        ja: {
-            home: 'HOME',
-            artists: 'ARTIST',
-            timetable: 'TIMETABLE',
-            ticket: 'TICKET',
-            ticketBtn: 'チケット購入',
-            countdownLabel: 'LIVEまであと',
-            days: '日',
-            hours: '時間',
-            minutes: '分',
-            seconds: '秒',
-            news: '📢 出演者速報',
-            featuredTitle: '⭐ 注目アーティスト',
-            artistsTitle: '🎤 出演アーティスト一覧',
-            timetableTitle: '🕐 タイムテーブル',
-            ticketTitle: '🎟️ チケット情報',
-            eventDate: '2027年08月10日 15:00 開演',
-            accessTitle: '📍 会場案内',
-            mapNote: '※本イベントは架空の会場です。',
-            followUs: 'FOLLOW US',
-            rights: '© 2025 FLASH BEAT. All rights reserved.',
-            open: '開演',
-            close: '閉演（21:30予定）',
-            backToTop: 'トップへ戻る'
-        },
-        en: {
-            home: 'HOME',
-            artists: 'ARTISTS',
-            timetable: 'TIMETABLE',
-            ticket: 'TICKET',
-            ticketBtn: 'Buy Ticket',
-            countdownLabel: 'Time Until Live',
-            days: 'Days',
-            hours: 'Hours',
-            minutes: 'Min',
-            seconds: 'Sec',
-            news: '📢 Artist News',
-            featuredTitle: '⭐ Featured Artists',
-            artistsTitle: '🎤 Artist Lineup',
-            timetableTitle: '🕐 Timetable',
-            ticketTitle: '🎟️ Ticket Info',
-            eventDate: 'August 10, 2027 - 3:00 PM',
-            accessTitle: '📍 Venue',
-            mapNote: '※This is a fictional venue.',
-            followUs: 'FOLLOW US',
-            rights: '© 2025 FLASH BEAT. All rights reserved.',
-            open: 'Doors Open',
-            close: 'End (9:30 PM)',
-            backToTop: 'Back to Top'
-        },
-        zh: {
-            home: '首页',
-            artists: '艺人',
-            timetable: '时间表',
-            ticket: '门票',
-            ticketBtn: '购买门票',
-            countdownLabel: '距离演出',
-            days: '天',
-            hours: '小时',
-            minutes: '分',
-            seconds: '秒',
-            news: '📢 艺人快讯',
-            featuredTitle: '⭐ 精选艺人',
-            artistsTitle: '🎤 演出艺人列表',
-            timetableTitle: '🕐 时间表',
-            ticketTitle: '🎟️ 门票信息',
-            eventDate: '2027年08月10日 15:00 开演',
-            accessTitle: '📍 场地指南',
-            mapNote: '※本活动为虚拟场地。',
-            followUs: '关注我们',
-            rights: '© 2025 FLASH BEAT. 版权所有。',
-            open: '开场',
-            close: '闭幕（21:30预定）',
-            backToTop: '返回顶部'
-        },
-        ko: {
-            home: '홈',
-            artists: '아티스트',
-            timetable: '타임테이블',
-            ticket: '티켓',
-            ticketBtn: '티켓 구매',
-            countdownLabel: '라이브까지',
-            days: '일',
-            hours: '시간',
-            minutes: '분',
-            seconds: '초',
-            news: '📢 출연자 속보',
-            featuredTitle: '⭐ 주목 아티스트',
-            artistsTitle: '🎤 출연 아티스트 목록',
-            timetableTitle: '🕐 타임테이블',
-            ticketTitle: '🎟️ 티켓 정보',
-            eventDate: '2027년 08월 10일 15:00 개막',
-            accessTitle: '📍 회장 안내',
-            mapNote: '※본 이벤트는 가상 회장입니다.',
-            followUs: '팔로우',
-            rights: '© 2025 FLASH BEAT. All rights reserved.',
-            open: '개막',
-            close: '폐막（21:30예정）',
-            backToTop: '맨 위로'
-        }
-    };
+/* 体験ブース検索*/
+    const regionSelect = document.getElementById('region');
+        const prefSelect = document.getElementById('pref');
 
-    let currentLang = 'ja';
-
-    /* =========================================================
-    言語適用
-    ========================================================= */
-    function applyLanguage(lang) {
-        currentLang = lang;
-        const t = translations[lang];
-
-        document.querySelectorAll('[data-i18n]').forEach(el => {
-            const key = el.getAttribute('data-i18n');
-            if (t[key]) el.textContent = t[key];
-        });
-
-        document.querySelectorAll('.countdown-label').forEach(el => {
-            el.textContent = t.countdownLabel;
-        });
-
-        const units = document.querySelectorAll('.countdown .unit');
-        if (units.length >= 4) {
-            units[0].textContent = t.days;
-            units[1].textContent = t.hours;
-            units[2].textContent = t.minutes;
-            units[3].textContent = t.seconds;
-        }
-
-        document.documentElement.lang = lang;
-
-        const backBtn = document.getElementById('backToTop');
-        if (backBtn) backBtn.setAttribute('aria-label', t.backToTop || 'Back to Top');
-    }
-
-    /* =========================================================
-    ニュースティッカー
-    ========================================================= */
-    const newsItems = [
-        '🎤 LUMINA VIBEの新曲「Neon Dreams」が先行配信決定！',
-        '⭐ KIRA☆NOVAのスペシャルコラボステージ開催！',
-        '🔥 NEON RUSHが過去最大規模のステージセットで登場！',
-        '🎵 Reflareの限定グッズが会場で販売開始！',
-        '✨ MIDNIGHT echoのサプライズゲスト出演が決定！',
-        '🎸 早期購入者限定特典：アーティストサイン会参加権プレゼント！'
-    ];
-    let currentNewsIndex = 0;
-
-    function showNextNews() {
-        const newsTicker = document.getElementById('newsTicker');
-        if (!newsTicker) return;
-        const item = document.createElement('div');
-        item.className = 'news-item';
-        item.textContent = newsItems[currentNewsIndex];
-        newsTicker.innerHTML = '';
-        newsTicker.appendChild(item);
-        currentNewsIndex = (currentNewsIndex + 1) % newsItems.length;
-    }
-
-    /* =========================================================
-    カウントダウン
-    ========================================================= */
-    const startDate = new Date("2025-12-31T18:00:00").getTime();
-    const eventDate = new Date("2027-08-10T15:00:00").getTime();
-
-    function formatDHs(ms) {
-        const DAY = 86400000, HOUR = 3600000, MINUTE = 60000;
-        return {
-            days: Math.floor(ms / DAY),
-            hours: Math.floor((ms % DAY) / HOUR),
-            minutes: Math.floor((ms % HOUR) / MINUTE),
-            seconds: Math.floor((ms % MINUTE) / 1000)
+        const prefData = {
+            "北海道": ["北海道"],
+            "東北": ["青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県"],
+            "関東": ["東京都", "神奈川県", "千葉県", "埼玉県", "茨城県", "栃木県", "群馬県"],
+            "中部": ["新潟県", "長野県", "山梨県", "静岡県", "愛知県", "岐阜県", "三重県"],
+            "近畿": ["大阪府", "京都府", "兵庫県", "滋賀県", "奈良県", "和歌山県"],
+            "中国": ["岡山県", "広島県", "山口県", "鳥取県", "島根県"],
+            "四国": ["徳島県", "香川県", "愛媛県", "高知県"],
+            "九州・沖縄": ["福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"]
         };
-    }
 
-    function updateCountdown() {
-        const now = Date.now();
+        regionSelect.addEventListener('change', () => {
+            const region = regionSelect.value;
+            prefSelect.innerHTML = '';
 
-        if (now < startDate) {
-            const r = formatDHs(startDate - now);
-            document.querySelectorAll('.days').forEach(el => el.textContent = r.days);
-            document.querySelectorAll('.hours').forEach(el => el.textContent = String(r.hours).padStart(2, '0'));
-            document.querySelectorAll('.minutes').forEach(el => el.textContent = String(r.minutes).padStart(2, '0'));
-            document.querySelectorAll('.seconds').forEach(el => el.textContent = String(r.seconds).padStart(2, '0'));
+            if (!region || !prefData[region]) {
+            prefSelect.innerHTML = '<option>地域を先に選択してください</option>';
             return;
-        }
-
-        if (now <= eventDate) {
-            const r = formatDHs(eventDate - now);
-            document.querySelectorAll('.days').forEach(el => el.textContent = r.days);
-            document.querySelectorAll('.hours').forEach(el => el.textContent = String(r.hours).padStart(2, '0'));
-            document.querySelectorAll('.minutes').forEach(el => el.textContent = '');
-            document.querySelectorAll('.seconds').forEach(el => el.textContent = String(r.seconds).padStart(2, '0'));
-            return;
-        }
-
-        document.querySelectorAll('.countdown').forEach(el => el.textContent = "イベントは終了しました！");
-    }
-
-    /* =========================================================
-    FV 背景クロスフェード
-    ========================================================= */
-    
-
-    /* =========================================================
-    スクロールフェードイン
-    ========================================================= */
-    function initFadeIn() {
-        const items = document.querySelectorAll('.fade-in');
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach((entry, i) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => entry.target.classList.add('visible'), i * 100);
-                }
-            });
-        }, { threshold: 0.1 });
-
-        items.forEach(el => observer.observe(el));
-    }
-
-    /* =========================================================
-    ヘッダー スクロールエフェクト
-    ========================================================= */
-    function initHeaderScroll() {
-        const header = document.getElementById('header');
-        if (!header) return;
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) header.classList.add('scrolled');
-            else header.classList.remove('scrolled');
-        });
-    }
-
-    /* =========================================================
-    モバイルメニュー
-    ========================================================= */
-    function initMobileMenu() {
-        const hamburger = document.getElementById('hamburger');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const closeMenu = document.getElementById('closeMenu');
-
-        if (!hamburger || !mobileMenu || !closeMenu) return;
-
-        hamburger.addEventListener('click', () => mobileMenu.classList.add('active'));
-        closeMenu.addEventListener('click', () => mobileMenu.classList.remove('active'));
-    }
-
-    /* =========================================================
-    スムーススクロール
-    ========================================================= */
-    function initSmoothScroll() {
-        document.querySelectorAll('[data-scroll]').forEach(el => {
-            el.addEventListener('click', e => {
-                e.preventDefault();
-                const id = el.getAttribute('data-scroll');
-                const target = document.querySelector(id);
-                if (target) target.scrollIntoView({ behavior: 'smooth' });
-            });
-        });
-    }
-
-    /* =========================================================
-    ビート音トグル
-    ========================================================= */
-    function initBeatToggle() {
-        const audio = document.getElementById('bgBeat');
-        const btn = document.getElementById('beatToggle');
-        const icon = document.getElementById('beatIcon');
-
-        if (!audio || !btn || !icon) return;
-
-        let playing = false;
-
-        btn.addEventListener('click', () => {
-            if (playing) {
-                audio.pause();
-                icon.textContent = '🔇';
-            } else {
-                audio.play().catch(()=>{});
-                icon.textContent = '🔊';
             }
-            playing = !playing;
-        });
-    }
 
-    /* =========================================================
-    FV キューブ（自動回転, ドラッグ回転, クリックで発光）
-    ========================================================= */
+            prefData[region].forEach(pref => {
+            const option = document.createElement('option');
+            option.value = pref;
+            option.textContent = pref;
+            prefSelect.appendChild(option);
+            });
+        });
+
+/* SNS投稿キャンペーン*/
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+        if(entry.isIntersecting){ entry.target.classList.add('active'); }
+        });
+    }, {threshold:0.1});
+    reveals.forEach(el=>observer.observe(el));
     
 
-    /* =========================================================
-    トップへ戻るボタン
-    ========================================================= */
-    function initBackToTop() {
-        const btn = document.getElementById('backToTop');
-        if (!btn) return;
+// SPナビ制御
+    const hamburger = document.querySelector('.hamburger');
+    const spNav = document.querySelector('.sp-nav');
 
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 500) btn.classList.add('visible');
-            else btn.classList.remove('visible');
+    // ハンバーガークリックでSPナビ表示切替とアイコン切替
+    const hamburgerIcon = hamburger.querySelector('i');
+
+    // 初期のaria属性
+    hamburger.setAttribute('role', 'button');
+    hamburger.setAttribute('aria-expanded', 'false');
+
+    hamburger.addEventListener('click', () => {
+        const opened = spNav.classList.toggle('active');
+        // Font Awesome のクラスを切り替えて × アイコンを表示
+        if (hamburgerIcon) {
+            hamburgerIcon.classList.toggle('fa-bars', !opened);
+            hamburgerIcon.classList.toggle('fa-xmark', opened);
+        }
+        // aria-expanded を更新
+        hamburger.setAttribute('aria-expanded', opened ? 'true' : 'false');
+        // ハンバーガー自体にも状態用クラスを付与（必要ならCSSでアニメ可）
+        hamburger.classList.toggle('open', opened);
+    });
+
+
+// --- Compare box hover image swap ---
+(function(){
+    const compareBoxes = document.querySelectorAll('.compare-box');
+    compareBoxes.forEach(box => {
+        const img = box.querySelector('img');
+        if(!img) return;
+        const hoverSrc = img.dataset.hoverSrc;
+        if(!hoverSrc) return; // no hover image provided
+
+        // store original src
+        img.dataset.originalSrc = img.src;
+        // ensure box is focusable for keyboard users
+        if(!box.hasAttribute('tabindex')) box.setAttribute('tabindex','0');
+
+        const swapToHover = () => { img.src = hoverSrc; };
+        const swapToOriginal = () => { img.src = img.dataset.originalSrc || img.src; };
+
+        box.addEventListener('mouseenter', swapToHover);
+        box.addEventListener('mouseleave', swapToOriginal);
+        box.addEventListener('focus', swapToHover);
+        box.addEventListener('blur', swapToOriginal);
+
+        // basic touch support
+        let touchActive = false;
+        box.addEventListener('touchstart', (e)=>{ touchActive = true; swapToHover(); }, {passive:true});
+        box.addEventListener('touchend', ()=>{ if(touchActive){ swapToOriginal(); touchActive=false; } }, {passive:true});
+    });
+})();
+    /* ============================
+    店舗検索：複数件表示（PC:3列 / SP:1件＋詳しく見る）
+    ============================ */
+    (function(){
+    const btn = document.getElementById('booth-search-btn');
+    const resultsEl = document.getElementById('store-results');
+    const regionSelect = document.getElementById('region');
+    const prefSelect = document.getElementById('pref');
+    if(!btn || !resultsEl) return;
+
+    // ✅ 同じ県で最大3店舗まで表示、それ以上はSP版と同様に詳しく見るで一覧表示
+    const MAX_DISPLAY = 3;  
+    const STORE_DATA = [
+        { region:"北海道", pref:"北海道", name:"MAGICLACE2.0 体験ブース 札幌店（仮）", image:"https://picsum.photos/seed/ml_hokkaido_1/640/360", lat:43.061811, lng:141.354376 },
+        { region:"東北", pref:"宮城県", name:"MAGICLACE2.0 体験ブース 仙台店（仮）", image:"https://picsum.photos/seed/ml_miyagi_1/640/360", lat:38.268215, lng:140.869356 },
+        { region:"東北", pref:"福島県", name:"MAGICLACE2.0 体験ブース 福島店（仮）", image:"https://picsum.photos/seed/ml_fukushima_1/640/360", lat:37.760833, lng:140.474717 },
+        { region:"関東", pref:"東京都", name:"MAGICLACE2.0 体験ブース 渋谷店（仮）", image:"https://picsum.photos/seed/ml_tokyo_1/640/360", lat:35.658034, lng:139.701636 },
+        { region:"関東", pref:"東京都", name:"MAGICLACE2.0 体験ブース 新宿店（仮）", image:"https://picsum.photos/seed/ml_tokyo_2/640/360", lat:35.689592, lng:139.700413 },
+        { region:"関東", pref:"東京都", name:"MAGICLACE2.0 体験ブース 池袋店（仮）", image:"https://picsum.photos/seed/ml_tokyo_3/640/360", lat:35.729503, lng:139.710900 },
+        { region:"関東", pref:"東京都", name:"MAGICLACE2.0 体験ブース 秋葉原店（仮）", image:"https://picsum.photos/seed/ml_tokyo_4/640/360", lat:35.698353, lng:139.773114 },
+        { region:"関東", pref:"千葉県",
+        name:"国際理工カレッジ 千葉市稲毛区穴川町236-2（テスト表示）",
+        image:"https://picsum.photos/seed/kic_chiba/640/360",
+        lat:35.636123,
+        lng:140.126755 },
+        { region:"関東", pref:"千葉県", name:"MAGICLACE2.0 体験ブース 船橋店（仮）", image:"https://picsum.photos/seed/ml_chiba_1/640/360", lat:35.694003, lng:139.982451 },
+        { region:"関東", pref:"神奈川県", name:"MAGICLACE2.0 体験ブース 横浜店（仮）", image:"https://picsum.photos/seed/ml_kanagawa_1/640/360", lat:35.443708, lng:139.638026 },
+        { region:"中部", pref:"愛知県", name:"MAGICLACE2.0 体験ブース 名古屋店（仮）", image:"https://picsum.photos/seed/ml_aichi_1/640/360", lat:35.170915, lng:136.881537 },
+        { region:"中部", pref:"静岡県", name:"MAGICLACE2.0 体験ブース 静岡店（仮）", image:"https://picsum.photos/seed/ml_shizuoka_1/640/360", lat:34.975560, lng:138.382812 },
+        { region:"近畿", pref:"大阪府", name:"MAGICLACE2.0 体験ブース 梅田店（仮）", image:"https://picsum.photos/seed/ml_osaka_1/640/360", lat:34.705493, lng:135.498302 },
+        { region:"近畿", pref:"大阪府", name:"MAGICLACE2.0 体験ブース 難波店（仮）", image:"https://picsum.photos/seed/ml_osaka_2/640/360", lat:34.665498, lng:135.501215 },
+        { region:"近畿", pref:"京都府", name:"MAGICLACE2.0 体験ブース 京都駅前店（仮）", image:"https://picsum.photos/seed/ml_kyoto_1/640/360", lat:34.985849, lng:135.758766 },
+        { region:"四国", pref:"愛媛県", name:"MAGICLACE2.0 体験ブース 松山店（仮）", image:"https://picsum.photos/seed/ml_ehime_1/640/360", lat:33.839153, lng:132.765528 },
+        { region:"九州・沖縄", pref:"福岡県", name:"MAGICLACE2.0 体験ブース 天神店（仮）", image:"https://picsum.photos/seed/ml_fukuoka_1/640/360", lat:33.590355, lng:130.401716 }
+    ];
+
+    const escapeHTML = (s) => String(s)
+        .replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;").replaceAll("'","&#39;");
+
+    const isSP = () => window.matchMedia("(max-width: 640px)").matches;
+
+    function cardHTML(store){
+        const mapUrl = `https://www.google.com/maps?q=${store.lat},${store.lng}`;
+        return `
+        <article class="store-card">
+            <div class="store-thumb">
+            <img src="${store.image}" alt="${escapeHTML(store.name)} の店舗イメージ" loading="lazy">
+            </div>
+            <div class="store-body">
+            <h3 class="store-name">${escapeHTML(store.name)}</h3>
+            <div class="store-meta">
+                <div>地域：${escapeHTML(store.region)} / ${escapeHTML(store.pref)}</div>
+                <div>位置：lat ${store.lat} / lng ${store.lng}</div>
+                <div>URL：<a href="${mapUrl}" target="_blank" rel="noopener">Googleマップで開く</a></div>
+            </div>
+            <div class="store-actions">
+                <a class="btn btn-outline" href="${mapUrl}" target="_blank" rel="noopener">
+                <i class="fa-solid fa-location-dot"></i> 地図で見る
+                </a>
+            </div>
+            </div>
+        </article>
+        `;
+    }
+
+    function renderPC(stores){
+        resultsEl.innerHTML = `<div class="store-grid">${stores.map(cardHTML).join("")}</div>`;
+    }
+
+    function renderSP(stores){
+        const first = stores[0];
+        const rest = stores.slice(1);
+
+        const listHtml = rest.map(s => {
+        const mapUrl = `https://www.google.com/maps?q=${s.lat},${s.lng}`;
+        return `<a href="${mapUrl}" target="_blank" rel="noopener">
+            ${escapeHTML(s.name)}
+            <small>${escapeHTML(s.pref)} / lat ${s.lat} / lng ${s.lng}</small>
+        </a>`;
+        }).join("");
+
+        resultsEl.innerHTML = `
+        <div class="store-grid">${cardHTML(first)}</div>
+        ${rest.length ? `
+            <div class="store-more">
+            <button class="btn btn-outline" type="button" id="store-more-btn">
+                詳しく見る（${rest.length}件）
+            </button>
+            <div class="store-list" id="store-list" style="display:none;">
+                ${listHtml}
+            </div>
+            </div>
+        ` : ``}
+        `;
+
+        const moreBtn = document.getElementById("store-more-btn");
+        const listEl = document.getElementById("store-list");
+        if(moreBtn && listEl){
+        moreBtn.addEventListener("click", () => {
+            const isOpen = listEl.style.display === "block";
+            listEl.style.display = isOpen ? "none" : "block";
+            moreBtn.textContent = isOpen ? `詳しく見る（${rest.length}件）` : "閉じる";
         });
+        }
+    }
 
-        btn.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+    function render(stores){
+        if(!stores.length){
+        resultsEl.innerHTML = `<p style="color:#bbb; text-align:center; margin: 10px 0 0;">該当する店舗がありません</p>`;
+        return;
+        }
+        if(isSP()) renderSP(stores);
+        else renderPC(stores);
+    }
+
+    function filterStores(){
+        const region = regionSelect ? regionSelect.value : "";
+        const pref = prefSelect ? prefSelect.value : "";
+        
+        // 地域と都道府県が両方未選択の場合は空配列を返す
+        if(!region && !pref) return [];
+        
+        return STORE_DATA.filter(s => {
+        if(pref) return s.pref === pref;
+        if(region) return s.region === region;
+        return true;
         });
     }
 
-    /* =========================================================
-    DOM READY
-    ========================================================= */
-    document.addEventListener('DOMContentLoaded', () => {
-        initLanguage();
-        showNextNews();
-        setInterval(showNextNews, 12000);
+    function openResults(){
+        resultsEl.classList.add("is-open");
+    }
 
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
-
-        initFadeIn();
-        initHeaderScroll();
-        initMobileMenu();
-        initSmoothScroll();
-        initBeatToggle();
-        initCube();
-        initBackToTop();
+    btn.addEventListener("click", () => {
+        const stores = filterStores();
+        render(stores);
+        openResults();
+        resultsEl.scrollIntoView({ behavior:"smooth", block:"start" });
     });
+
+    // ✅ 画面回転・リサイズでPC/SP表示を作り直す（結果が出てる時だけ）
+    window.addEventListener("resize", () => {
+        if(!resultsEl.classList.contains("is-open")) return;
+        const stores = filterStores();
+        render(stores);
+    });
+    })();
