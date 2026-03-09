@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEON RUSH | FLASH BEAT ARTISTS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0E0E22, #2A297A);
+      color: #fff;
+      font-family: 'Noto Sans JP', sans-serif;
+      text-align: center;
+      padding: 1rem;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 480px;
+      margin: 0 auto;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ヘッダー */
+    header {
+      text-align: left;
+      margin-bottom: 1.5rem;
+    }
+
+    .back-link-top {
+      color: #fff;
+      text-decoration: none;
+      opacity: 0.8;
+      transition: color 0.2s ease, opacity 0.2s ease;
+      cursor: pointer;
+      display: inline-block;
+    }
+
+    /* ホバーで色を変える（アクセス性のためフォーカス時も同様） */
+    .back-link-top:hover,
+    .back-link-top:focus {
+      color: #FF007C;
+      opacity: 1;
+      text-decoration: underline;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(255,0,124,0.08);
+    }
+
+    /* ---- NEON RUSH：稲妻（ネオンスパーク）レイヤー ---- */
+    .neon-lightning {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 120%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      background: repeating-linear-gradient(
+          90deg,
+          transparent 0%,
+          transparent 96%,
+          rgba(0,255,255,0.7) 97%,
+          transparent 100%
+      );
+      opacity: 0;
+      animation: neonLightningAnim 12s infinite ease-in-out;
+    }
+
+    @keyframes neonLightningAnim {
+      0%, 88% { opacity: 0; transform: translateX(-100%); }
+      92% { opacity: 0.9; transform: translateX(0%); }
+      96% { opacity: 0.4; transform: translateX(60%); }
+      100% { opacity: 0; transform: translateX(100%); }
+    }
+
+
+    /* メインビジュアル */
+    .artist-image {
+      width: 90%;
+      margin: 1rem auto 1.5rem;
+      display: block;
+      border-radius: 0;
+      box-shadow:
+        0 0 20px rgba(0, 255, 255, 0.25),
+        0 0 40px rgba(255, 0, 130, 0.18),
+        0 8px 24px rgba(0, 0, 0, 0.45);
+      animation: slideUp 0.8s ease-out 0.2s both;
+      transition: filter 0.3s ease;
+    }
+
+    .artist-image:hover {
+      filter: brightness(1.12);
+    }
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* アーティスト名 */
+    .artist-name {
+      margin-bottom: 0.3rem;
+      animation: slideUp 0.8s ease-out 0.3s both;
+    }
+
+    .artist-name h1 {
+      font-family: 'Orbitron', 'Noto Sans JP', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.3rem;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #00FFFF, #FF007C);
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 6px rgba(0, 255, 255, 0.6));
+      animation: glowShift 4s ease-in-out infinite;
+    }
+
+    @keyframes glowShift {
+      0%, 100% { filter: drop-shadow(0 0 6px rgba(0, 255, 255, 0.6)); }
+      50% { filter: drop-shadow(0 0 14px rgba(255, 0, 130, 0.8)); }
+    }
+
+
+    .artist-name-jp {
+      font-size: 0.875rem;
+      font-weight: 400;
+      opacity: 0.9;
+    }
+
+    .sub-desc {
+      font-size: 0.72rem;
+      opacity: 0.75;
+      margin-bottom: 1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #00eaff;
+    }
+
+
+    /* キャッチコピー */
+    .catchphrase {
+      font-size: 1rem;
+      line-height: 1.8;
+      margin: 1.5rem auto;
+      max-width: 320px;
+      animation: glowPulse 4s ease-in-out infinite;
+    }
+
+    @keyframes glowPulse {
+      0%, 100% {
+        text-shadow:
+          0 0 6px rgba(0, 255, 255, 0.35),
+          0 0 12px rgba(255, 0, 130, 0.25);
+      }
+      50% {
+        text-shadow:
+          0 0 14px rgba(0, 255, 255, 0.55),
+          0 0 24px rgba(255, 0, 130, 0.45);
+      }
+    }
+
+    .pink {
+      color: #FF007C;
+      font-weight: 700;
+    }
+
+    .cyan {
+      color: #00FFFF;
+      font-weight: 700;
+    }
+
+    /* セクション */
+    .section {
+      margin: 2rem auto;
+      max-width: 320px;
+      text-align: left;
+      animation: slideUp 0.8s ease-out 0.5s both;
+    }
+
+    .section h2 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+      text-align: left;
+    }
+
+    .section p {
+      font-size: 0.9rem;
+      line-height: 1.8;
+      opacity: 0.95;
+    }
+
+    .section::before {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 1px;
+      margin: 1.8rem 0;
+      background: linear-gradient(90deg,
+          transparent,
+          rgba(0,255,255,0.4),
+          rgba(255,0,130,0.4),
+          transparent);
+    }
+
+
+    /* 出演情報 */
+    .performance-info h2 {
+      font-size: 1.13rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .performance-info p {
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+    }
+
+
+    /* SNSセクション */
+    .social-section {
+      margin-top: 3rem;
+      animation: slideUp 0.8s ease-out 0.7s both;
+    }
+
+    .social-section h2 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-align: center;
+      letter-spacing: 0.1em;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .social-links a {
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .social-links a:hover {
+      transform: scale(1.15);
+    }
+
+    .social-links img {
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+    }
+
+    .social-links img {
+      transition: transform 0.25s ease, filter 0.25s ease;
+      filter: drop-shadow(0 0 6px rgba(0, 255, 255, 0.35));
+    }
+
+    .social-links img:hover {
+      transform: scale(1.18);
+      filter: drop-shadow(0 0 18px rgba(0, 255, 255, 0.55))
+              drop-shadow(0 0 22px rgba(255, 0, 130, 0.55));
+    }
+
+    /* ---- NEON：強ネオン CTA ---- */
+    .cta-next {
+      margin-top: 2.4rem;
+      margin-bottom: 2.2rem;
+      text-align: center;
+      color: #00ffff;
+      font-size: 1.05rem;
+      text-shadow:
+        0 0 12px rgba(0,255,255,0.7),
+        0 0 24px rgba(255,0,130,0.6);
+      animation: ctaNeonFade 5s infinite ease-in-out;
+      letter-spacing: 0.03em;
+    }
+
+    .cta-date {
+      margin-top: 0.4rem;
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: #ff007c;
+      text-shadow:
+        0 0 14px rgba(255,0,130,0.8),
+        0 0 28px rgba(255,0,130,0.5);
+    }
+
+    @keyframes ctaNeonFade {
+      0%,100% { opacity: 0.85; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
+    }
+
+
+
+    /* 戻るリンク（下部） */
+    .back-home {
+      display: inline-block;
+      color: #fff;
+      margin-top: 3rem;
+      margin-bottom: 2rem;
+      opacity: 0.7;
+      text-decoration: none;
+      transition: color 0.2s ease, opacity 0.2s ease;
+      animation: slideUp 0.8s ease-out 0.8s both;
+      cursor: pointer;
+    }
+
+    .back-link-top:hover,
+    .back-link-top:focus {
+      color: #FF007C; /* NEON ピンク */
+      opacity: 1;
+      text-decoration: underline;
+}
+
+
+    /* ---- セクションのフェードアップ ---- */
+    /* セクション初期状態（共通） */
+    .section {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+    }
+
+    /* セクション可視化後（IntersectionObserver で追加される） */
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+      text-align: center;
+    }
+
+    /* セクションタイトル（h2）の微スケールアニメ） */
+    .section h2 {
+      transform: scale(0.97);
+      transition: transform 0.6s ease-out;
+      text-align: center;
+    }
+
+    .section.visible h2 {
+      transform: scale(1);
+    }
+
+    /* ---- NEON：豪華ネオンチケット ---- */
+    .neon-ticket {
+      padding: 1.4rem 1.2rem;
+      margin-top: 2.2rem;
+      border-radius: 14px;
+
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(0,255,255,0.6);
+
+      box-shadow:
+        0 0 20px rgba(0,255,255,0.55),
+        0 0 35px rgba(255,0,130,0.45),
+        inset 0 0 25px rgba(0,255,255,0.25);
+
+      position: relative;
+      text-align: center;
+    }
+
+    /* 光のアクセント（左右） */
+    .neon-ticket::before,
+    .neon-ticket::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: radial-gradient(circle,
+        rgba(0,255,255,0.8),
+        rgba(255,0,130,0.6),
+        transparent);
+      transform: translateY(-50%);
+      animation: neonTicketPulse 4s infinite ease-in-out;
+    }
+
+    .neon-ticket::before {
+      left: -12px;
+    }
+    .neon-ticket::after {
+      right: -12px;
+    }
+
+    @keyframes neonTicketPulse {
+      0%,100% { transform: scale(1) translateY(-50%); }
+      50% { transform: scale(1.4) translateY(-50%); }
+    }
+
+
+    /* レスポンシブ調整 */
+    @media (max-width: 390px) {
+      body {
+        padding: 0.75rem;
+      }
+
+      .artist-name h1 {
+        font-size: 1.4rem;
+      }
+
+      .catchphrase {
+        font-size: 0.9rem;
+      }
+
+      .section h2 {
+        font-size: 1rem;
+      }
+
+      .section p {
+        font-size: 0.85rem;
+      }
+    }
+      header {
+        margin-bottom: 1.8rem;
+        padding-left: 2px;
+      }
+
+
+
+    @media (min-width: 768px) {
+      .artist-name h1 {
+        font-size: 1.8rem;
+      }
+
+      .catchphrase {
+        font-size: 1.1rem;
+      }
+
+      .section h2 {
+        font-size: 1.25rem;
+      }
+
+      .section p {
+        font-size: 1rem;
+      }
+    }
+
+    /* ---- NEON：BGMボタン（統合・固定位置化） ---- */
+    #site-bgm-btn {
+      position: fixed;        /* ← KIRA と同じ固定表示に統一 */
+      top: 18px;
+      right: 18px;
+      z-index: 2000;
+
+      background: linear-gradient(135deg, #00ffff, #ff007c); /* ← NEONデザイン維持 */
+      color: #000;
+      border: none;
+      border-radius: 999px;
+      padding: 0.7em 1.5em;
+      font-size: 1.05em;
+      font-weight: bold;
+
+      box-shadow: 
+        0 0 12px rgba(0,255,255,0.45),
+        0 0 22px rgba(255,0,130,0.45);
+
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+
+      transition: transform 0.4s ease, filter 0.4s ease;
+    }
+
+    #site-bgm-btn:hover {
+      transform: scale(1.06);
+      filter: brightness(1.12);
+    }
+
+      /* --- NEON RUSH 背景ネオンライン --- */
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 200%;
+        height: 100%;
+        background: 
+          repeating-linear-gradient(
+            90deg,
+            rgba(0, 255, 255, 0.15) 0px,
+            rgba(0, 255, 255, 0.15) 2px,
+            transparent 2px,
+            transparent 40px
+          ),
+          repeating-linear-gradient(
+            90deg,
+            rgba(255, 0, 130, 0.15) 0px,
+            rgba(255, 0, 130, 0.15) 3px,
+            transparent 3px,
+            transparent 55px
+          );
+        animation: neonFlow 18s linear infinite;
+        z-index: -1;
+        pointer-events: none;
+        opacity: 0.45;
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 220px;
+        background: radial-gradient(circle at bottom,
+            rgba(255,0,130,0.25) 0%,
+            rgba(0,0,0,0) 70%);
+        pointer-events: none;
+        z-index: -1;
+      }
+
+
+      @keyframes neonFlow {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+    </style>
+    </head>
+  <body>
+  <div class="neon-lightning"></div>
+
+  <!-- サイト専用BGM（ファイルパスは任意で差し替え可） -->
+  <audio id="siteBGM" src="./assets/NEON RUSH（ネオン・ラッシュ）/Untitled (1).mp3" loop preload="auto"></audio>
+    <button id="site-bgm-btn" type="button"><span id="site-bgm-ico">🔊</span>BGM</button>
+  <div class="container">
+    <!-- ヘッダー -->
+    <header>
+      <a href="./index.html" class="back-link-top">ホームに戻る</a>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main>
+      <!-- メインビジュアル -->
+      <img src="./images/NEON RUSH（ネオン・ラッシュ）v1.jpg" alt="NEON RUSH ライブステージ" class="artist-image">
+
+      <!-- アーティスト名 -->
+      <div class="artist-name">
+        <h1>NEON RUSH</h1>
+        <p class="artist-name-jp">（ネオン・ラッシュ）</p>
+      </div>
+
+      <p class="sub-desc">ELECTRO × ROCK FUSION UNIT</p>
+
+
+      <!-- キャッチコピー -->
+      <p class="catchphrase">
+        <span class="pink">エレクトロ</span>×<span class="cyan">ロック</span>の熱狂が、<br>
+        夜を光で染め上げる。
+      </p>
+
+      <!-- アーティスト紹介 -->
+      <section class="section">
+        <h2>アーティスト紹介</h2>
+        <p>
+          疾走感とネオンの煌きを融合させた<br>
+          ダンス×ロックバンド。<br>圧倒的な
+          ステージパフォーマンスと<br>光の演出で観客を
+          魅了する。
+        </p>
+      </section>
+
+      <!-- 出演情報 -->
+      <section class="section performance-info neon-ticket">
+        <h2>出演情報</h2>
+        <p>8月10日（土）20:10〜</p>
+      </section>
+
+
+      <!-- SNSセクション -->
+      <section class="social-section">
+        <h2>FOLLOW US</h2>
+        <div class="social-links">
+          <a href="#" aria-label="X (Twitter)">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z'/%3E%3C/svg%3E" alt="X">
+          </a>
+          <a href="#" aria-label="Instagram">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='url(%23ig-gradient)'%3E%3Cdefs%3E%3ClinearGradient id='ig-gradient' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23f58529'/%3E%3Cstop offset='50%25' style='stop-color:%23dd2a7b'/%3E%3Cstop offset='100%25' style='stop-color:%238134af'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z'/%3E%3C/svg%3E" alt="Instagram">
+          </a>
+          <a href="#" aria-label="TikTok">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z'/%3E%3C/svg%3E" alt="TikTok">
+          </a>
+        </div>
+      </section>
+
+      <div class="cta-next">
+        <p>最高盛り上がる夜にしましょう‼ステージで待っています。</p>
+        <p class="cta-date">8月10日（土）</p>
+      </div>
+
+
+      <!-- 戻るリンク（下部） -->
+      <a href="./index.html" class="back-home">ホームに戻る</a>
+    </main>
+  </div>
+
+  <script>
+    // スムーススクロール（オプション）
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // 画像の遅延読み込みエラー処理
+    const artistImage = document.querySelector('.artist-image');
+    artistImage.addEventListener('error', function() {
+      this.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500"%3E%3Crect fill="%232A297A" width="400" height="500"/%3E%3Ctext x="50%25" y="50%25" fill="white" font-family="sans-serif" font-size="20" text-anchor="middle" dominant-baseline="middle"%3ENEON RUSH%3C/text%3E%3C/svg%3E';
+    });
+
+    // ホバーエフェクトの追加（SNSアイコン）
+    document.querySelectorAll('.social-links a').forEach(link => {
+      link.addEventListener('mouseenter', function() {
+        this.style.filter = 'brightness(1.2)';
+      });
+      link.addEventListener('mouseleave', function() {
+        this.style.filter = 'brightness(1)';
+      });
+    });
+  </script>
+    <script>
+    
+    // ページ初回ロード時に自動でBGMウィンドウを開く
+    window.addEventListener('DOMContentLoaded', openBgmWin);
+    // ページ離脱時にBGMウィンドウは閉じず、BGMは継続
+    </script>
+    <script>
+    // サイト専用BGMページ内再生＆ON/OFF UI（既存ボタンがあれば上書き）
+    const siteBgmAudio = document.getElementById('siteBGM');
+    const siteBgmBtn = document.getElementById('site-bgm-btn');
+    const siteBgmIco = document.getElementById('site-bgm-ico');
+    let siteBgmPlaying = true;
+    siteBgmAudio.volume = 0.45;
+    // ページ初回ロード時に自動再生
+    window.addEventListener('DOMContentLoaded', () => {
+      siteBgmAudio.play().catch(()=>{});
+      siteBgmBtn.setAttribute('aria-pressed', 'true');
+      siteBgmIco.textContent = '🔊';
+    });
+    // ON/OFF切り替え
+    siteBgmBtn.onclick = function() {
+      if (siteBgmPlaying) {
+        siteBgmAudio.pause();
+        siteBgmIco.textContent = '🔇';
+        siteBgmBtn.setAttribute('aria-pressed', 'false');
+      } else {
+        siteBgmAudio.currentTime = 0;
+        siteBgmAudio.play().catch(()=>{});
+        siteBgmIco.textContent = '🔊';
+        siteBgmBtn.setAttribute('aria-pressed', 'true');
+      }
+      siteBgmPlaying = !siteBgmPlaying;
+    };
+    // ページ離脱時はBGM自動停止
+    window.addEventListener('beforeunload', () => { try { siteBgmAudio.pause(); } catch(e){} });
+  /* ----------------------------------------
+    STEP C：セクションアニメーション統一（KIRA / NEON 共通）
+    IntersectionObserver で登場演出を制御
+  ----------------------------------------- */
+
+const sections = document.querySelectorAll('.section');
+
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15 });
+
+sections.forEach(sec => sectionObserver.observe(sec));
+
+    </script>
+    </body>
+</html>

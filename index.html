@@ -1,0 +1,2195 @@
+    <!DOCTYPE html>
+    <html lang="ja">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLASH BEAT - 音楽フェス公式サイト</title>
+
+    <!-- OGP basic -->
+    <meta property="og:title" content="FLASH BEAT - 音楽フェス公式サイト">
+    <meta property="og:description" content="Special Stage / 2027.8.10 SAT - 音が光になる夜。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://your-domain.example/flash_beat_enhanced2.html">
+    <meta property="og:image" content="https://your-domain.example/images/ogp_flash_beat_1200x630_v01.png">
+    <meta property="og:site_name" content="FLASH BEAT">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="FLASH BEAT - 音楽フェス公式サイト">
+    <meta name="twitter:description" content="Special Stage / 2027.8.10 SAT - 音が光になる夜。">
+    <meta name="twitter:image" content="https://your-domain.example/images/ogp_flash_beat_1200x630_v01.png">
+
+
+    <!-- 既存の共通CSS（必要に応じて維持） -->
+    <!-- <link rel="stylesheet" href="css/common.css"> -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="./CSS/common.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        }
+
+        body {
+        font-family: 'Poppins', 'Noto Sans JP', sans-serif;
+        color: #fff;
+        background: linear-gradient(-45deg, #3B246B, #0E0E22, #2A297A, #171717);
+        background-size: 400% 400%;
+        animation: gradientShift 20s ease infinite, fadeIn 1.2s ease-out forwards;
+        opacity: 0;
+        transform: translateY(10px);
+        overflow-x: hidden;
+        }
+
+        @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+        }
+
+        @keyframes fadeIn {
+        to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ヘッダー */
+        header {
+        position: sticky !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background: rgba(14, 14, 34, 0.8);
+        backdrop-filter: blur(10px);
+        padding: 1rem 2rem;
+        transition:  0.3s ease;
+        border-bottom: 2px solid rgba(255, 94, 201, 0.3);
+        }
+
+        header.scrolled {
+        background: rgba(14, 14, 34, 0.95);
+        }
+
+        .header-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        }
+
+        .logo {
+        font-size: 2rem;
+        font-weight: 900;
+        background: linear-gradient(90deg, #ff5ec9, #00ffff, #ff5ec9);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-shadow: 0 0 20px rgba(255, 94, 201, 0.5);
+        letter-spacing: 2px;
+        white-space: nowrap;
+        }
+
+        nav ul {
+        display: flex;
+        gap: 2.5rem;
+        list-style: none;
+        }
+
+        nav a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        position: relative;
+        cursor: pointer;
+        }
+
+        nav a::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #ff5ec9;
+        transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+        width: 100%;
+        }
+
+        /* カウントダウン周り */
+        .header-right {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        }
+
+        .countdown-box {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-size: 0.9rem;
+        color: #00ffff;
+        font-weight: 600;
+        }
+
+        .countdown {
+        display: flex;
+        gap: 0.4rem;
+        align-items: center;
+        font-size: 0.9rem;
+        color: #00ffff;
+        font-weight: 600;
+        }
+
+        .countdown-label {
+        font-size: 0.9rem;
+        color: #00ffff;
+        font-weight: 600;
+        margin-right: 0.2rem;
+        }
+
+        .countdown-values .unit {
+        font-size: 0.7rem;
+        margin-right: 0.2rem;
+        }
+
+        .ticket-btn {
+        padding: 0.8rem 1.6rem;
+        background: linear-gradient(135deg, #ff5ec9, #00ffff);
+        border: none;
+        border-radius: 50px;
+        color: #000;
+        font-weight: 700;
+        cursor: pointer;
+        animation: glowPulse 2.5s ease-in-out infinite;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+        white-space: nowrap;
+        }
+
+        @keyframes glowPulse {
+        0%, 100% { 
+            box-shadow: 0 0 10px #ff5ec9, 0 0 20px #ff5ec9; 
+            opacity: 1; 
+        }
+        50% { 
+            box-shadow: 0 0 25px #fff, 0 0 40px #ff5ec9; 
+            opacity: 0.85; 
+        }
+        }
+
+        .ticket-btn:hover {
+        transform: scale(1.05);
+        }
+
+        /* ハンバーガー */
+        .hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        }
+
+        .hamburger span {
+        width: 30px;
+        height: 3px;
+        background: #fff;
+        transition: all 0.3s ease;
+        }
+
+        /* モバイルメニュー */
+        .mobile-menu {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 280px;
+        height: 100vh;
+        background: rgba(14, 14, 34, 0.98);
+        backdrop-filter: blur(20px);
+        transition: left 0.4s ease;
+        z-index: 2000;
+        padding: 2rem;
+        }
+
+        .mobile-menu.active {
+        left: 0;
+        }
+
+        .mobile-menu ul {
+        list-style: none;
+        margin-top: 3rem;
+        }
+
+        .mobile-menu li {
+        margin-bottom: 2rem;
+        }
+
+        .mobile-menu a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 1.3rem;
+        font-weight: 600;
+        cursor: pointer;
+        }
+
+        .close-btn {
+        font-size: 2rem;
+        color: #fff;
+        cursor: pointer;
+        }
+
+        /* -----------------------------
+        バーガーメニュー内のチケット購入ボタン
+        ------------------------------ */
+        .mobile-menu-ticket {
+            display: block;
+            padding: 0.9rem 1rem;
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: #000;
+
+            background: linear-gradient(135deg, #ff5ec9, #00ffff);
+            border-radius: 12px;
+            text-align: center;
+
+            box-shadow: 0 0 15px rgba(255, 94, 201, 0.7),
+                        0 0 25px rgba(0,255,255,0.5);
+        }
+
+
+        /* メインコンテンツ */
+        main {
+        margin-top: 20px;
+        padding: 2rem;
+        max-width: 1400px;
+        margin-left: auto;
+        margin-right: auto;
+        }
+
+        /* FV / Hero */
+        .hero {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center; /* 横中央 */
+            align-items: center; /* 縦中央 */
+            overflow: hidden;
+            }
+
+
+        .animation-container {
+        width: 100%;
+        height: 300px;
+        overflow: hidden;
+        position: relative;
+        }
+
+
+        /* FV中央にインタラクティブキューブ */
+        .cube-container {
+        perspective: 1000px;
+        width: 200px;
+        height: 200px;
+        }
+
+        .cube {
+        width: 200px;
+        height: 200px;
+        position: relative;
+        transform-style: preserve-3d;
+        cursor: grab;
+        transition: transform 0.1s linear;
+        }
+
+        .cube:active {
+        cursor: grabbing;
+        }
+
+        .cube-face {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        font-weight: 900;
+        backdrop-filter: blur(5px);
+        border-radius: 16px;
+        border: 2px solid #1af7fb;
+        box-shadow: 0 0 20px #1af7fb, inset 0 0 20px rgba(26,247,251,0.3);
+        background: rgba(255,255,255,0.02);
+        }
+
+        /* ← いったん hover 変形はオフにしておく */
+        /* .cube-face:hover { transform: scale(1.05); } */
+
+        .face-front  { transform: rotateY(0deg)   translateZ(100px); }
+        .face-back   { transform: rotateY(180deg) translateZ(100px); }
+        .face-right  { transform: rotateY(90deg)  translateZ(100px); }
+        .face-left   { transform: rotateY(-90deg) translateZ(100px); }
+        .face-top    { transform: rotateX(90deg)  translateZ(100px); }
+        .face-bottom { transform: rotateX(-90deg) translateZ(100px); }
+
+        
+
+        /* ニュースバー */
+        .news-bar {
+        background: rgba(255, 94, 201, 0.1);
+        border: 2px solid rgba(255, 94, 201, 0.3);
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin: 2rem 0;
+        overflow: hidden;
+        position: relative;
+        animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+        }
+
+        .news-bar h3 {
+        color: #00ffff;
+        margin-bottom: 0.5rem;
+        text-align: center;
+        }
+
+        .news-ticker {
+        position: relative;
+        height: 30px;
+        overflow: hidden;
+        }
+
+        .news-item {
+        position: absolute;
+        white-space: nowrap;
+        animation: tickerScroll 12s linear infinite;
+        font-size: 1.1rem;
+        color: #fff;
+        right: -100%;
+        }
+
+        @keyframes tickerScroll {
+        0% {
+            right: -100%;
+            opacity: 0;
+        }
+        5% {
+            opacity: 1;
+        }
+        95% {
+            opacity: 1;
+        }
+        100% {
+            right: 100%;
+            opacity: 0;
+        }
+        }
+
+        /* セクションタイトル */
+        .section-title {
+        font-size: 2.5rem;
+        font-weight: 900;
+        text-align: center;
+        margin: 3rem 0 2rem;
+        background: linear-gradient(90deg, #ff5ec9, #fff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        }
+
+        /* 注目アーティスト */
+        .featured-artists {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin: 3rem 0;
+        }
+
+        .featured-card {
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden;
+        height: 400px;
+        background: linear-gradient(135deg, #3B246B, #2A297A);
+        border: 3px solid rgba(255, 94, 201, 0.4);
+        transition: all 0.3s ease;
+        }
+
+        .featured-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(255, 94, 201, 0.4);
+        }
+
+        .featured-card.fade-in1 {
+        background-image:
+            linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.15)),
+            url('./images/NEON RUSH（ネオン・ラッシュ）v1.jpg');
+        background-size: cover;
+        background-position: center;
+        }
+
+        .featured-card.fade-in2 {
+        background-image:
+            linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.15)),
+            url('./images/KIRA☆NOVA（キラ・ノヴァ）.jpg');
+        background-size: cover;
+        background-position: center;
+        }
+
+        .featured-info {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 2rem;
+        background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+        }
+
+        /* =========================================================
+    ★ Featured Artists（注目アーティスト）名前の強調
+   ========================================================= */
+        .featured-info h3 {
+            font-size: 2.4rem !important;      /* 目立たせるためサイズUP */
+            font-weight: 900 !important;       /* ロゴ級の強さ */
+            letter-spacing: -1px !important;   /* ほんの少し詰めて締まりを出す */
+
+            /* 派手すぎないが存在感のあるネオングラデ */
+            background: linear-gradient(90deg, #ff5ec9, #00eaff);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            /* 周囲に淡いグローを追加して立体感アップ */
+            text-shadow:
+                0 0 12px rgba(255, 94, 201, 0.55),
+                0 0 22px rgba(0, 255, 255, 0.45);
+        }
+
+
+        .details-btn {
+        margin-top: 1rem;
+        padding: 0.7rem 1.5rem;
+        background: rgba(255, 94, 201, 0.2);
+        border: 2px solid #ff5ec9;
+        border-radius: 30px;
+        color: #fff;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        }
+
+        .details-btn:hover {
+        background: #ff5ec9;
+        color: #000;
+        }
+
+        /* アーティスト一覧 */
+        .artist-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+        }
+
+        .artist-card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 2px solid rgba(255, 94, 201, 0.3);
+        border-radius: 20px;
+        padding: 2rem;
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+        position: relative;
+        overflow: visible;
+        }
+
+        .artist-card:hover {
+        transform: scale(1.03);
+        box-shadow: 0 0 15px 5px rgba(255, 0, 255, 0.5);
+        border-color: #ff5ec9;
+        }
+
+        /* =========================================================
+    ★ Artist List（出演アーティスト一覧）名前の強調
+   ========================================================= */
+.artist-card h3 {
+    font-size: 1.7rem !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.5px;
+    /* 名前にほんのりグラデーションを付与 */
+    background: linear-gradient(180deg, #00ffff, #007a8c);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    text-shadow:
+        0 0 8px rgba(0, 255, 255, 0.4),
+        0 0 16px rgba(0, 255, 255, 0.25);
+}
+
+/* =========================================================
+    ★ Artist List の日本語名（説明文）の視認性向上
+   ========================================================= */
+.artist-card p {
+    font-size: 0.95rem;
+    opacity: 0.88;
+    letter-spacing: 0.3px;
+}
+
+
+        /* ホバーで出るサイドサムネイル / パネル */
+        .artist-panel {
+        position: absolute;
+        left: 110%;
+        top: 50%;
+        transform: translateY(-50%) translateX(0);
+        width: 260px;
+        padding: 1.2rem 1.5rem;
+        border-radius: 16px;
+        background: rgba(14,14,34,0.95);
+        border: 2px solid #ff5ec9;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+        opacity: 0;
+        pointer-events: none;
+        /* フェード（opacity）を無効化：表示は即時。transformのみトランジションを残す。 */
+        transition: transform 0.15s ease;
+        z-index: 20;
+        text-align: left;
+        font-size: 0.85rem;
+        }
+
+        /* 既存のホバー動作（デフォルト：右側に表示） */
+        .artist-card:hover .artist-panel {
+        opacity: 1;
+        transform: translateY(-50%) translateX(10px);
+        pointer-events: auto;
+        }
+
+        /* 変更: カードがフェードインして "visible" クラスを持つ場合は、カードの上にパネルを表示する */
+        .artist-card.fade-in.visible:hover .artist-panel {
+        /* 上に表示（カードの上端の外側） — マウスが乗っている時のみ表示 */
+        top: auto;
+        bottom: calc(100% + 12px);
+        left: 50%;
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+        }
+
+        /* 小さい画面では従来通りモーダル中央表示のまま */
+
+        .artist-panel-title {
+        font-weight: 800;
+        margin-bottom: 0.25rem;
+        }
+
+        .artist-panel-sub {
+        opacity: 0.75;
+        margin-bottom: 0.5rem;
+        }
+
+        .artist-panel-desc {
+        opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+        .artist-panel {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) scale(0.98);
+            width: min(90%, 320px);
+        }
+        }
+
+        /* タイムテーブル */
+        .timetable {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+        padding: 2rem;
+        margin: 3rem 0;
+        }
+
+        .timetable-item {
+        display: flex;
+        align-items: center;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        background: linear-gradient(90deg, rgba(42, 41, 122, 0.5), rgba(59, 36, 107, 0.5));
+        border-left: 4px solid #00ffff;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+        }
+
+        .time {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #00ffff;
+        min-width: 100px;
+        }
+
+        .artist-name {
+        font-size: 1.3rem;
+        font-weight: 600;
+        }
+
+        /* アーティストごとの発光エフェクト */
+        .timetable-item[data-artist="LUMINA VIBE"]:hover {
+        box-shadow: 0 0 30px 10px #00FFFF, inset 0 0 20px rgba(255, 215, 0, 0.3);
+        border-left-color: #00FFFF;
+        transform: translateX(10px);
+        }
+
+        .timetable-item[data-artist="KIRA☆NOVA"]:hover {
+        box-shadow: 0 0 30px 10px #FF1493, inset 0 0 20px rgba(255, 20, 147, 0.3);
+        border-left-color: #FF1493;
+        transform: translateX(10px);
+        }
+
+        .timetable-item[data-artist="NEON RUSH"]:hover {
+        box-shadow: 0 0 30px 10px #FFD700, inset 0 0 20px rgba(0, 255, 255, 0.3);
+        border-left-color: #FFD700;
+        transform: translateX(10px);
+        }
+
+        .timetable-item[data-artist="Reflare"]:hover {
+        box-shadow: 0 0 30px 10px #FF4500, inset 0 0 20px rgba(255, 69, 0, 0.3);
+        border-left-color: #FF4500;
+        transform: translateX(10px);
+        }
+
+        .timetable-item[data-artist="MIDNIGHT echo"]:hover {
+        box-shadow: 0 0 30px 10px #9370DB, inset 0 0 20px rgba(147, 112, 219, 0.3);
+        border-left-color: #9370DB;
+        transform: translateX(10px);
+        }
+
+        /* チケットセクション + LIVE映像枠 */
+        #ticket {
+            text-align: center;
+            margin: 4rem 0;
+            position: relative;
+        }
+
+        /* 枠だけあったラッパーは「動画エリアのレイアウト用」だけにする */
+        .ticket-video-wrapper {
+            position: relative;
+            margin-top: 2rem;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        /* ここは「動画そのもののコンテナ」としてだけ使う（枠・背景はナシ） */
+        .ticket-video-frame {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: none;
+            border-radius: 0;
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+        }
+
+        /* 「🎥 LIVE VIDEO」表示は削除（枠の演出も完全オフ） */
+        .ticket-video-frame::before {
+            content: none;
+        }
+
+
+        /* 会場案内 */
+        #access .map-note {
+        text-align:center;
+        font-size:0.9rem;
+        color:#fff;
+        margin-top: 0.75rem;
+        opacity: 0.7;
+        }
+
+        /* 会場案内 2カラムレイアウト */
+        #access {
+            margin-top: 4rem;
+        }
+
+        .access-content {
+            display: flex;
+            gap: 2rem;
+            align-items: stretch;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .access-map,
+        .access-info {
+            flex: 1 1 320px;
+            min-width: 0;
+        }
+
+        /* 右側の図解カード */
+        .access-info-card {
+            height: 100%;
+            padding: 1.8rem 2rem;
+            border-radius: 16px;
+            background: radial-gradient(circle at top left,
+                rgba(255, 94, 201, 0.18),
+                rgba(14, 14, 34, 0.95));
+            border: 1px solid rgba(255, 94, 201, 0.35);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.45);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .access-info-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            color: #00ffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .access-steps {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+            font-size: 0.92rem;
+        }
+
+        .access-steps li {
+            display: grid;
+            grid-template-columns: minmax(110px, 140px) 1fr;
+            gap: 0.6rem 1rem;
+            align-items: flex-start;
+        }
+
+        .access-step-label {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.35rem 0.7rem;
+            border-radius: 999px;
+            background: rgba(0, 255, 255, 0.15);
+            border: 1px solid rgba(0, 255, 255, 0.6);
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #00ffff;
+            white-space: nowrap;
+        }
+
+        .access-step-text {
+            opacity: 0.85;
+            line-height: 1.6;
+        }
+
+        .access-note-small {
+            margin-top: 0.8rem;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        /* 既存の注意書きも少し余白調整 */
+        #access .map-note {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #fff;
+            margin-top: 1.5rem;
+            opacity: 0.7;
+        }
+
+        /* モバイル時は縦並び */
+        @media (max-width: 768px) {
+            .access-content {
+                flex-direction: column;
+            }
+
+            .access-info-card {
+                padding: 1.5rem 1.4rem;
+            }
+
+            .access-steps li {
+                grid-template-columns: 1fr;
+            }
+
+            .access-step-label {
+                justify-content: flex-start;
+            }
+        }
+
+
+        /* フッター */
+        footer {
+        text-align: center;
+        padding: 3rem 2rem;
+        background: rgba(14, 14, 34, 0.8);
+        margin-top: 4rem;
+        }
+
+        .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 2rem;
+        }
+
+        .social-links a {
+        display: inline-block;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: rgba(255, 94, 201, 0.2);
+        border: 2px solid #ff5ec9;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+        background: #ff5ec9;
+        transform: scale(1.2) rotate(10deg);
+        }
+
+        .social-links img {
+        width: 30px;
+        height: 30px;
+        filter: brightness(1.1);
+        }
+
+        /* フェードイン */
+        .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+        }
+
+        /* 言語切り替え UI */
+        .lang-switcher {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.3rem 0.7rem;
+        border-radius: 999px;
+        border: 1px solid rgba(255,94,201,0.4);
+        background: rgba(0,0,0,0.4);
+        font-size: 0.8rem;
+        white-space: nowrap;
+        }
+
+        .lang-switcher span {
+        font-size: 0.9rem;
+        }
+
+        #langSelect {
+        background: transparent;
+        border: none;
+        color: #fff;
+        font-size: 0.8rem;
+        cursor: pointer;
+        outline: none;
+        }
+
+        #langSelect option {
+        color: #000;
+        }
+
+        /* ビート音トグルボタン */
+        .beat-toggle {
+        padding: 0.25rem 0.6rem;
+        border-radius: 999px;
+        border: 1px solid rgba(0,255,255,0.6);
+        background: rgba(0,0,0,0.4);
+        color: #00ffff;
+        font-size: 0.8rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.2rem;
+        cursor: pointer;
+        transition: background 0.2s ease, transform 0.1s ease;
+        }
+
+        .beat-toggle:hover {
+        background: rgba(0,255,255,0.15);
+        }
+
+        .beat-toggle:active {
+        transform: scale(0.96);
+        }
+
+        /* トップへ戻るボタン */
+        .back-to-top {
+        position: fixed;
+        right: 1.5rem;
+        bottom: 1.5rem;
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 50%;
+        border: none;
+        background: linear-gradient(135deg, #ff5ec9, #00ffff);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        transition: transform 0.2s ease, opacity 0.2s ease;
+        z-index: 1500;
+        opacity: 0;
+        pointer-events: none;
+        }
+
+        .back-to-top.visible {
+        opacity: 1;
+        pointer-events: auto;
+        }
+
+        .back-to-top span {
+        font-size: 1.6rem;
+        color: #000;
+        font-weight: 900;
+        }
+
+        @media (max-width: 768px) {
+
+    header {
+        padding: 0.8rem 1rem;
+    }
+
+    .header-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+    }
+
+    /* ▼ 1行目：ロゴ + ハンバーガー */
+    .header-row-1 {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    .logo {
+        font-size: 1.4rem;
+    }
+
+    .hamburger {
+        display: flex !important;
+        flex-direction: column;
+        gap: 4px;
+        cursor: pointer;
+    }
+
+    .hamburger span {
+        width: 28px;
+        height: 3px;
+        background: #fff;
+    }
+
+    nav ul {
+        display: none !important;
+    }
+
+    /* ▼ 2行目：BGM + 言語選択 */
+    .header-row-2 {
+        display: flex;
+        gap: 0.8rem;
+        align-items: center;
+    }
+
+    .beat-toggle {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.8rem;
+        white-space: nowrap;
+    }
+
+    .lang-switcher {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.8rem;
+        white-space: nowrap;
+    }
+
+    /* ▼ 3行目：カウントダウン（横いっぱい） */
+    .header-row-3 {
+        width: 100%;
+    }
+
+    .countdown-box {
+        display: block !important;
+        font-size: 0.85rem;
+        padding: 0.3rem 0;
+        white-space: nowrap;
+    }
+
+    /* スマホ（768px以下）はPC用ナビを非表示 */
+@media (max-width: 768px) {
+    .pc-nav {
+        display: none !important;
+    }
+}
+/* PC（769px以上）はPCナビを表示 */
+@media (min-width: 769px) {
+    .pc-nav {
+        display: flex !important;
+    }
+}
+
+    /* HERO 下の余白調整（header が多段になるため） */
+    .hero {
+        padding-top: 10rem;
+    }
+}
+
+/* =========================================================
+    PC版ヘッダー（スマホ非干渉）
+========================================================= */
+@media (min-width: 769px) {
+
+    /* header 全体の横並び化 */
+    header .header-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    /* スマホ向け row 構造をPCでは解除 */
+    .header-row-1,
+    .header-row-2,
+    .header-row-3 {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1.5rem;
+        width: auto;
+        margin: 0;
+    }
+
+    /* nav の表示（PC用） */
+    .pc-nav ul {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+    }
+
+    .pc-nav a {
+        color: #fff;
+        font-weight: 700;
+        text-decoration: none;
+        transition: 0.2s ease;
+    }
+
+    .pc-nav a:hover {
+        color: #00ffff;
+        text-shadow: 0 0 10px rgba(0,255,255,0.6);
+    }
+
+    /* カウントダウンをPCバーの中央に配置 */
+    .countdown-box {
+        display: flex !important;
+        font-size: 1rem;
+        white-space: nowrap;
+        color: #00ffff;
+        margin-left: 1rem;
+    }
+
+    /* BEATボタン（PCサイズ調整） */
+    .beat-toggle {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    /* 言語切替（PC調整） */
+    .lang-switcher {
+        padding: 0.35rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    /* PC専用 チケット購入ボタン */
+    .pc-ticket-btn {
+    padding: 0.9rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #000;
+    text-decoration: none;
+    white-space: nowrap;
+
+    /* ★ デザイン統一：ネオン強 */
+    background: linear-gradient(90deg, #E875FF, #00E8FF);
+    border-radius: 50px;
+
+    box-shadow:
+        0 0 20px rgba(255, 94, 201, 0.7),
+        0 0 40px rgba(0, 255, 255, 0.6);
+
+    transition: 0.2s ease;
+}
+
+.pc-ticket-btn:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow:
+        0 0 25px rgba(255, 94, 201, 0.9),
+        0 0 50px rgba(0, 255, 255, 0.9);
+}
+
+
+    /* PCではハンバーガーを非表示 */
+    .hamburger {
+        display: none !important;
+    }
+}
+
+
+
+
+    </style>
+    </head>
+
+    <body>
+    <!-- グローバルBGM・アーティストBGM用audio要素（既存ボタンで制御） -->
+    <audio id="globalBGM" src="assets/audio/Untitled.mp3" loop preload="auto"></audio>
+    <audio id="artistBGM" loop preload="auto"></audio>
+    <!-- ビート音（ループ）: assets/audio 内の 2 曲からランダムで再生 -->
+    <audio id="bgBeat" loop preload="none"></audio>
+
+    <!-- Header -->
+    <header id="header">
+    <div class="header-container">
+
+        <!-- ▼ 1行目：ロゴ + ハンバーガー -->
+        <div class="header-row-1">
+            <div class="logo">FLASH BEAT</div>
+
+            <nav class="pc-nav">
+                <ul>
+                    <li><a href="#home" data-scroll="#home">HOME</a></li>
+                    <li><a href="#artists" data-scroll="#artists">ARTIST</a></li>
+                    <li><a href="#timetable" data-scroll="#timetable">TIMETABLE</a></li>
+                    <li><a href="#ticket" data-scroll="#ticket">TICKET</a></li>
+                </ul>
+                
+            </nav>
+
+            
+
+            <div class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+
+        <!-- ▼ 2行目：BGM + 言語選択 -->
+        <div class="header-row-2">
+            <button class="beat-toggle" id="beatToggle">
+                <span id="beatIcon">🔇</span> BEAT
+            </button>
+
+            <div class="lang-switcher">
+                <span>🌐</span>
+                <select id="langSelect">
+                    <option value="ja">日本語</option>
+                    <option value="en">English</option>
+                    <option value="zh">中文</option>
+                    <option value="ko">한국어</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- ▼ 3行目：カウントダウン -->
+        <div class="header-row-3">
+            <div class="countdown-box">
+                <div class="countdown" role="timer">
+                    <span class="countdown-label">LIVEまであと</span>
+                    <span class="days">0</span>日
+                    <span class="hours">00</span>時間
+                    <span class="minutes">00</span>分
+                    <span class="seconds">00</span>秒
+                </div>
+            </div>
+            <div class="pc-nav">
+                <a href="./flash_beat_ticket_page.html" class="pc-ticket-btn">チケット購入</a>
+            </div>
+            
+        </div>
+    </div>
+</header>
+
+
+
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <span class="close-btn" id="closeMenu">✕</span>
+        <ul>
+        <li><a data-scroll="#home" data-i18n="home">HOME</a></li>
+        <li><a data-scroll="#artists" data-i18n="artists">ARTIST</a></li>
+        <li><a data-scroll="#timetable" data-i18n="timetable">TIMETABLE</a></li>
+        <li><a data-scroll="#ticket" data-i18n="ticket">TICKET</a></li>
+        </ul>
+        <li>
+            <a href="./flash_beat_ticket_page.html" class="mobile-menu-ticket">
+                🎟 チケット購入
+            </a>
+        </li>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section with FV cube -->
+        <section class="hero" id="home">
+
+    <!-- 照明Canvas -->
+        <canvas id="stageLightsCanvas"></canvas>
+
+        <div class="cube-container">
+            <div class="cube" id="cube">
+            <div class="cube-face face-front"></div>
+            <div class="cube-face face-back"></div>
+            <div class="cube-face face-right"></div>
+            <div class="cube-face face-left"></div>
+            <div class="cube-face face-top"></div>
+            <div class="cube-face face-bottom"></div>
+        </div>
+        </div>
+        </section>
+
+        <!-- News Bar -->
+        <div class="news-bar">
+        <h3 data-i18n="news">📢 出演者速報</h3>
+        <div class="news-ticker" id="newsTicker"></div>
+        </div>
+
+        <!-- Featured Artists -->
+        <section>
+        <h2 class="section-title" data-i18n="featuredTitle">⭐ 注目アーティスト</h2>
+        <div class="featured-artists">
+            <div class="featured-card fade-in fade-in1">
+            <div class="featured-info">
+                <h3>NEON RUSH</h3>
+                <p>エレクトロ×ロックの熱狂が、夜を光で染め上げる。</p>
+                <button class="details-btn">
+                <a href="./neon_rush_artist_page.html" style="color: inherit; text-decoration: none;">詳しく見る</a>
+                </button>
+            </div>
+            </div>
+            <div class="featured-card fade-in fade-in2">
+            <div class="featured-info">
+                <h3>KIRA☆NOVA</h3>
+                <p>幻想的サウンドの超新星</p>
+                <button class="details-btn">
+                <a href="./kira_nova_artist_page.html" style="color: inherit; text-decoration: none;">詳しく見る</a>
+                </button>
+            </div>
+            </div>
+        </div>
+        </section>
+
+        <!-- Artist List -->
+        <section id="artists">
+        <h2 class="section-title" data-i18n="artistsTitle">🎤 出演アーティスト一覧</h2>
+        <div class="artist-grid">
+            <!-- LUMINA VIBE -->
+            <div class="artist-card fade-in">
+            <h3>LUMINA VIBE</h3>
+            <p>ルミナ・ヴァイブ</p>
+            <div class="artist-panel" style="border-color:#00FFFF;">
+                <div class="artist-panel-title" style="color:#00FFFF;">LUMINA VIBE</div>
+                <div class="artist-panel-sub">ルミナ・ヴァイブ</div>
+                <p class="artist-panel-desc">光とシンセが溶け合う“ネオン・ポップ”。
+                透明感のある歌声で会場を光空間に染めるユニット。</p>
+                <p style="margin-top:0.6rem; font-size:0.75rem; opacity:0.7;">
+                ジャンル: Electronic / Pop<br>
+                出演時間: 16:00〜
+                </p>
+            </div>
+            </div>
+            <!-- KIRA☆NOVA -->
+            <div class="artist-card fade-in">
+            <h3>KIRA☆NOVA</h3>
+            <p>キラ・ノヴァ</p>
+            <div class="artist-panel" style="border-color:#FF1493;">
+                <div class="artist-panel-title" style="color:#FF1493;">KIRA☆NOVA</div>
+                <div class="artist-panel-sub">キラ・ノヴァ</div>
+                <p class="artist-panel-desc">星屑のように輝くキラPOPアクト。
+                可愛さ×未来感のステージが映えるソロアーティスト。</p>
+                <p style="margin-top:0.6rem; font-size:0.75rem; opacity:0.7;">
+                ジャンル: Future Pop<br>
+                出演時間: 18:00〜
+                </p>
+            </div>
+            </div>
+            <!-- NEON RUSH -->
+            <div class="artist-card fade-in">
+            <h3>NEON RUSH</h3>
+            <p>ネオンラッシュ</p>
+            <div class="artist-panel" style="border-color:#FFD700;">
+                <div class="artist-panel-title" style="color:#FFD700;">NEON RUSH</div>
+                <div class="artist-panel-sub">ネオンラッシュ</div>
+                <p class="artist-panel-desc">スピードと衝動のエレクトロ・ロック。
+                稲妻のようなサウンドでフロアを爆発させる4人組。</p>
+                <p style="margin-top:0.6rem; font-size:0.75rem; opacity:0.7;">
+                ジャンル: Electro Rock<br>
+                出演時間: 20:10〜
+                </p>
+            </div>
+            </div>
+            <!-- Reflare -->
+            <div class="artist-card fade-in">
+            <h3>Reflare</h3>
+            <p>リフレア</p>
+            <div class="artist-panel" style="border-color:#FF4500;">
+                <div class="artist-panel-title" style="color:#FF4500;">Reflare</div>
+                <div class="artist-panel-sub">リフレア</div>
+                <p class="artist-panel-desc">夜明けの光を思わせるドラマチックなトランス。
+                爆発力のあるサウンドで会場を幻想空間へ導くDJユニット。</p>
+                <p style="margin-top:0.6rem; font-size:0.75rem; opacity:0.7;">
+                ジャンル: Rock / Alternative<br>
+                出演時間: 19:10〜
+                </p>
+            </div>
+            </div>
+            <!-- MIDNIGHT echo -->
+            <div class="artist-card fade-in">
+            <h3>MIDNIGHT echo</h3>
+            <p>ミッドナイト・エコー</p>
+            <div class="artist-panel" style="border-color:#9370DB;">
+                <div class="artist-panel-title" style="color:#9370DB;">MIDNIGHT echo</div>
+                <div class="artist-panel-sub">ミッドナイト・エコー</div>
+                <p class="artist-panel-desc">深夜の街を思わせるシンセ＆シティロック。
+                静寂から一気に加速する“夜のドライブ系”サウンド。</p>
+                <p style="margin-top:0.6rem; font-size:0.75rem; opacity:0.7;">
+                ジャンル: Ambient / Chill<br>
+                出演時間: 17:00〜
+                </p>
+            </div>
+            </div>
+        </div>
+        </section>
+
+        <!-- Timetable -->
+        <section id="timetable">
+        <h2 class="section-title" data-i18n="timetableTitle">🕐 タイムテーブル</h2>
+        <div class="timetable">
+            <div class="timetable-item fade-in" data-artist="OPEN">
+            <span class="time">15:00~</span>
+            <span class="artist-name" data-i18n="open">開演</span>
+            </div>
+            <div class="timetable-item fade-in" data-artist="LUMINA VIBE">
+            <span class="time">16:00~</span>
+            <span class="artist-name">LUMINA VIBE</span>
+            </div>
+            <div class="timetable-item fade-in" data-artist="MIDNIGHT echo">
+            <span class="time">17:00~</span>
+            <span class="artist-name">MIDNIGHT echo</span>
+            </div>
+            <div class="timetable-item fade-in" data-artist="KIRA☆NOVA">
+            <span class="time">18:00~</span>
+            <span class="artist-name">KIRA☆NOVA</span>
+            </div>
+            <div class="timetable-item fade-in" data-artist="Reflare">
+            <span class="time">19:10~</span>
+            <span class="artist-name">Reflare</span>
+            </div>
+            <div class="timetable-item fade-in" data-artist="NEON RUSH">
+            <span class="time">20:10~</span>
+            <span class="artist-name">NEON RUSH</span>
+            </div>
+            <div class="timetable-item fade-in" data-artist="SECRET">
+            <span class="time">21:00~</span>
+            <span class="artist-name">？？？</span>
+            </div>
+            <div class="timetable-item fade-in" data-artist="CLOSE">
+            <span class="time"></span>
+            <span class="artist-name" data-i18n="close">閉演（21:30予定）</span>
+            </div>
+        </div>
+        </section>
+
+        <!-- Ticket Section -->
+        <section id="ticket">
+        <h2 class="section-title" data-i18n="ticketTitle">🎟️ チケット情報</h2>
+        <p style="font-size: 1.5rem; margin-bottom: 1rem;" data-i18n="eventDate">
+            2027年08月10日 15:00 開演
+        </p>
+
+        <!-- チケットボタンなどの実体は上に重ねて表示 -->
+            <div class="ticket-inner">
+            <a href="flash_beat_ticket_page.html" class="ticket-btn" style="font-size: 1.2rem; padding: 1rem 3rem;" data-i18n="ticketBtn">
+                チケット購入
+            </a>
+            </div>
+
+        <div class="ticket-video-wrapper">
+    <div class="ticket-video-frame">
+        <!-- 実際の動画をここに入れる -->
+        <video
+            src="assets/video/live_loop.mp4"
+            autoplay
+            muted
+            loop
+            playsinline
+            style="width: 100%; height: 100%; object-fit: cover;">
+        </video>
+    </div>
+</div>
+
+
+        <!-- Map Section -->
+        <section id="access">
+    <h2 class="section-title" data-i18n="accessTitle">📍 会場案内</h2>
+
+    <div class="access-content">
+        <!-- 左：マップ -->
+        <div class="access-map">
+            <iframe
+                src="https://www.google.com/maps?q=35.627,139.776+(FLASH+BEAT+Special+Stage)&hl=ja&z=14&output=embed"
+                width="100%"
+                height="100%"
+                style="border:0; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,0.12);"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                aria-label="FLASH BEAT Special Stage">
+            </iframe>
+        </div>
+
+        <!-- 右：図解イメージの説明ブロック -->
+        <div class="access-info">
+            <div class="access-info-card">
+                <h3 class="access-info-title">ACCESS GUIDE</h3>
+
+                <ul class="access-steps">
+                    <li>
+                        <span class="access-step-label">① 最寄エリア</span>
+                        <span class="access-step-text">
+                            ウォーターフロント特設会場周辺（※架空会場）。マップ上の
+                            <strong>「FLASH BEAT Special Stage」</strong> ピンを目印にしてください。
+                        </span>
+                    </li>
+                    <li>
+                        <span class="access-step-label">② 会場イメージ</span>
+                        <span class="access-step-text">
+                            海沿いエリアに組まれた屋外ステージ。観客エリアは
+                            <strong>ステージ正面〜左右ウイング</strong> に広がる構成です。
+                        </span>
+                    </li>
+                    <li>
+                        <span class="access-step-label">③ 動線イメージ</span>
+                        <span class="access-step-text">
+                            マップ上のメインストリートから、スタッフ誘導に沿って
+                            <strong>入場ゲート → フードエリア → ステージ前</strong>
+                            の順で進行するイメージです。
+                        </span>
+                    </li>
+                </ul>
+
+                <p class="access-note-small">
+                    ※実在の会場ではなく、学内制作用の架空イベントです。<br>
+                    ※交通手段や周辺施設などの詳細は、実際の開催時にご確認ください。
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <p class="map-note" data-i18n="mapNote">※本イベントは架空の会場です。</p>
+</section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <h3 style="margin-bottom: 1rem;" data-i18n="followUs">FOLLOW US</h3>
+        <div class="social-links">
+        <a href="#" aria-label="X"><img src="images/logo-white.png" alt="X"></a>
+        <a href="#" aria-label="Instagram"><img src="./images/Instagram_Glyph_Gradient.png" alt="Instagram"></a>
+        <a href="#" aria-label="TikTok"><img src="./images/TikTok_Icon_Black-03.jpg" alt="TikTok"></a>
+        </div>
+        <p style="margin-top: 2rem; opacity: 0.6;" data-i18n="rights">© 2025 FLASH BEAT. All rights reserved.</p>
+    </footer>
+
+    <!-- トップへ戻るボタン -->
+    <button class="back-to-top" id="backToTop" aria-label="トップへ戻る">
+        <span>↑</span>
+    </button>
+
+    <!-- 既存の common.js はコメントアウト（必要なら併用も可） -->
+    <!-- <script src="js/common.js" defer></script> -->
+
+    <script>
+        // ===== 多言語テキスト =====
+        const translations = {
+        ja: {
+            home: 'HOME',
+            artists: 'ARTIST',
+            timetable: 'TIMETABLE',
+            ticket: 'TICKET',
+            ticketBtn: 'チケット購入',
+            countdownLabel: 'LIVEまであと',
+            days: '日',
+            hours: '時間',
+            minutes: '分',
+            seconds: '秒',
+            news: '📢 出演者速報',
+            featuredTitle: '⭐ 注目アーティスト',
+            artistsTitle: '🎤 出演アーティスト一覧',
+            timetableTitle: '🕐 タイムテーブル',
+            ticketTitle: '🎟️ チケット情報',
+            eventDate: '2027年08月10日 15:00 開演',
+            accessTitle: '📍 会場案内',
+            mapNote: '※本イベントは架空の会場です。',
+            followUs: 'FOLLOW US',
+            rights: '© 2025 FLASH BEAT. All rights reserved.',
+            open: '開演',
+            close: '閉演（21:30予定）',
+            backToTop: 'トップへ戻る'
+        },
+        en: {
+            home: 'HOME',
+            artists: 'ARTISTS',
+            timetable: 'TIMETABLE',
+            ticket: 'TICKET',
+            ticketBtn: 'Buy Ticket',
+            countdownLabel: 'Time Until Live',
+            days: 'Days',
+            hours: 'Hours',
+            minutes: 'Min',
+            seconds: 'Sec',
+            news: '📢 Artist News',
+            featuredTitle: '⭐ Featured Artists',
+            artistsTitle: '🎤 Artist Lineup',
+            timetableTitle: '🕐 Timetable',
+            ticketTitle: '🎟️ Ticket Info',
+            eventDate: 'August 10, 2027 - 3:00 PM',
+            accessTitle: '📍 Venue',
+            mapNote: '※This is a fictional venue.',
+            followUs: 'FOLLOW US',
+            rights: '© 2025 FLASH BEAT. All rights reserved.',
+            open: 'Doors Open',
+            close: 'End (9:30 PM)',
+            backToTop: 'Back to Top'
+        },
+        zh: {
+            home: '首页',
+            artists: '艺人',
+            timetable: '时间表',
+            ticket: '门票',
+            ticketBtn: '购买门票',
+            countdownLabel: '距离演出',
+            days: '天',
+            hours: '小时',
+            minutes: '分',
+            seconds: '秒',
+            news: '📢 艺人快讯',
+            featuredTitle: '⭐ 精选艺人',
+            artistsTitle: '🎤 演出艺人列表',
+            timetableTitle: '🕐 时间表',
+            ticketTitle: '🎟️ 门票信息',
+            eventDate: '2027年08月10日 15:00 开演',
+            accessTitle: '📍 场地指南',
+            mapNote: '※本活动为虚拟场地。',
+            followUs: '关注我们',
+            rights: '© 2025 FLASH BEAT. 版权所有。',
+            open: '开场',
+            close: '闭幕（21:30预定）',
+            backToTop: '返回顶部'
+        },
+        ko: {
+            home: '홈',
+            artists: '아티스트',
+            timetable: '타임테이블',
+            ticket: '티켓',
+            ticketBtn: '티켓 구매',
+            countdownLabel: '라이브까지',
+            days: '일',
+            hours: '시간',
+            minutes: '분',
+            seconds: '초',
+            news: '📢 출연자 속보',
+            featuredTitle: '⭐ 주목 아티스트',
+            artistsTitle: '🎤 출연 아티스트 목록',
+            timetableTitle: '🕐 타임테이블',
+            ticketTitle: '🎟️ 티켓 정보',
+            eventDate: '2027년 08월 10일 15:00 개막',
+            accessTitle: '📍 회장 안내',
+            mapNote: '※본 이벤트는 가상 회장입니다.',
+            followUs: '팔로우',
+            rights: '© 2025 FLASH BEAT. All rights reserved.',
+            open: '개막',
+            close: '폐막（21:30예정）',
+            backToTop: '맨 위로'
+        }
+        };
+
+        let currentLang = 'ja';
+
+        function applyLanguage(lang) {
+        currentLang = lang;
+        const t = translations[lang];
+
+        // data-i18n によるテキスト差し替え
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (t[key]) {
+            el.textContent = t[key];
+            }
+        });
+
+        /* =========================================================
+    カウントダウン（HTML内に完結・安定版）
+   ========================================================= */
+const eventDate = new Date("2027-08-10T15:00:00").getTime();
+
+/* 日 / 時 / 分 / 秒 へ変換 */
+function formatTime(ms) {
+    const DAY = 86400000;
+    const HOUR = 3600000;
+    const MINUTE = 60000;
+
+    return {
+        days: Math.floor(ms / DAY),
+        hours: Math.floor((ms % DAY) / HOUR),
+        minutes: Math.floor((ms % HOUR) / MINUTE),
+        seconds: Math.floor((ms % MINUTE) / 1000)
+    };
+}
+
+/* カウントダウン更新 */
+function updateCountdown() {
+    const now = Date.now();
+    const diff = eventDate - now;
+
+    // 終了した場合
+    if (diff <= 0) {
+        document.querySelectorAll('.countdown').forEach(el => {
+            el.textContent = "イベントは終了しました！";
+        });
+        clearInterval(timer);
+        return;
+    }
+
+    // 値の反映
+    const t = formatTime(diff);
+
+    document.querySelectorAll('.days').forEach(el =>
+        el.textContent = t.days
+    );
+    document.querySelectorAll('.hours').forEach(el =>
+        el.textContent = String(t.hours).padStart(2, '0')
+    );
+    document.querySelectorAll('.minutes').forEach(el =>
+        el.textContent = String(t.minutes).padStart(2, '0')
+    );
+    document.querySelectorAll('.seconds').forEach(el =>
+        el.textContent = String(t.seconds).padStart(2, '0')
+    );
+}
+
+/* 初回実行 + 毎秒更新 */
+updateCountdown();
+let timer = setInterval(updateCountdown, 1000);
+
+
+        // html lang 属性
+        document.documentElement.lang = lang;
+
+        // トップへ戻るの aria-label
+        const backBtn = document.getElementById('backToTop');
+        if (backBtn) backBtn.setAttribute('aria-label', t.backToTop || 'Back to Top');
+        }
+
+        // ===== ニュースティッカー =====
+        const newsItems = [
+        '🎤 LUMINA VIBEの新曲「Neon Dreams」が先行配信決定！',
+        '⭐ KIRA☆NOVAのスペシャルコラボステージ開催！',
+        '🔥 NEON RUSHが過去最大規模のステージセットで登場！',
+        '🎵 Reflareの限定グッズが会場で販売開始！',
+        '✨ MIDNIGHT echoのサプライズゲスト出演が決定！',
+        '🎸 早期購入者限定特典：アーティストサイン会参加権プレゼント！'
+        ];
+        let currentNewsIndex = 0;
+
+        function showNextNews() {
+        const newsTicker = document.getElementById('newsTicker');
+        if (!newsTicker) return;
+        const newsItem = document.createElement('div');
+        newsItem.className = 'news-item';
+        newsItem.textContent = newsItems[currentNewsIndex];
+        newsTicker.innerHTML = '';
+        newsTicker.appendChild(newsItem);
+        currentNewsIndex = (currentNewsIndex + 1) % newsItems.length;
+        }
+
+        /* =========================================================
+    カウントダウン：2027年8月10日 15:00（JST）版
+   ========================================================= */
+const eventDate = new Date("2027-08-10T15:00:00+09:00").getTime();
+
+/* 日・時間・分・秒に変換 */
+function formatTime(ms) {
+    const DAY = 86400000;
+    const HOUR = 3600000;
+    const MINUTE = 60000;
+
+    return {
+        days: Math.floor(ms / DAY),
+        hours: Math.floor((ms % DAY) / HOUR),
+        minutes: Math.floor((ms % HOUR) / MINUTE),
+        seconds: Math.floor((ms % MINUTE) / 1000)
+    };
+}
+
+/* カウントダウン更新処理 */
+function updateCountdown() {
+    const now = Date.now();
+    const diff = eventDate - now;
+
+    // イベント終了
+    if (diff <= 0) {
+        document.querySelectorAll('.countdown').forEach(el => {
+            el.textContent = "イベントは終了しました！";
+        });
+        clearInterval(timer);
+        return;
+    }
+
+    const t = formatTime(diff);
+
+    document.querySelectorAll('.days').forEach(el =>
+        el.textContent = t.days
+    );
+    document.querySelectorAll('.hours').forEach(el =>
+        el.textContent = String(t.hours).padStart(2, '0')
+    );
+    document.querySelectorAll('.minutes').forEach(el =>
+        el.textContent = String(t.minutes).padStart(2, '0')
+    );
+    document.querySelectorAll('.seconds').forEach(el =>
+        el.textContent = String(t.seconds).padStart(2, '0')
+    );
+}
+
+/* 初回実行＋1秒ごと更新 */
+updateCountdown();
+let timer = setInterval(updateCountdown, 1000);
+
+
+        
+
+        // ===== スクロールフェードイン =====
+        const fadeItems = [];
+
+        function initFadeIn() {
+        document.querySelectorAll('.fade-in').forEach(el => fadeItems.push(el));
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => entry.target.classList.add('visible'), i * 100);
+            }
+            });
+        }, { threshold: 0.1 });
+        fadeItems.forEach(el => observer.observe(el));
+        }
+
+        // ===== ヘッダースクロールエフェクト =====
+        function initHeaderScroll() {
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+            } else {
+            header.classList.remove('scrolled');
+            }
+        });
+        }
+
+        // ===== モバイルメニュー =====
+        function initMobileMenu() {
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const closeMenu = document.getElementById('closeMenu');
+
+        if (!hamburger || !mobileMenu || !closeMenu) return;
+
+        hamburger.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+        });
+
+        closeMenu.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+        });
+
+        mobileMenu.querySelectorAll('a[data-scroll]').forEach(link => {
+            link.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            });
+        });
+        }
+
+        // ===============================
+        // ★ スクロール時にメニュー自動クローズ
+        // ===============================
+        let mobileMenuOpen = false;
+
+        const mobileMenu = document.getElementById("mobileMenu");
+        const hamburger = document.getElementById("hamburger");
+        const closeBtn = document.getElementById("closeMenu");
+
+        // メニューが開かれたらフラグON
+        hamburger.addEventListener("click", () => {
+            mobileMenuOpen = true;
+        });
+
+        // ×ボタンは既存の閉じる挙動をそのまま利用しつつフラグだけ追加
+        closeBtn.addEventListener("click", () => {
+            mobileMenuOpen = false;
+        });
+
+        // スクロールが発生したら自動で閉じる
+        window.addEventListener("scroll", () => {
+            if (mobileMenuOpen) {
+                mobileMenu.classList.remove("active");
+                mobileMenuOpen = false;
+            }
+        });
+
+// ▼ スクロールが発生したら自動で閉じる（ここが今回の追加）
+let lastScrollY = window.scrollY;
+
+window.addEventListener("scroll", () => {
+    if (!mobileMenuOpen) return;
+
+    // スクロールしたら閉じる
+    if (Math.abs(window.scrollY - lastScrollY) > 5) {
+        mobileMenu.classList.remove("active"); // ← 既存の閉じるアニメ
+        mobileMenuOpen = false;
+    }
+
+    lastScrollY = window.scrollY;
+});
+
+
+
+        // ===== スムーススクロール（ナビゲーション含む） =====
+        function initSmoothScroll() {
+        document.querySelectorAll('[data-scroll]').forEach(el => {
+            el.addEventListener('click', e => {
+            e.preventDefault();
+            const targetId = el.getAttribute('data-scroll');
+            const target = document.querySelector(targetId);
+            if (target) {
+                // ヘッダーが固定されている場合に備えてオフセットを計算
+                const header = document.getElementById('header');
+                const headerHeight = header ? header.offsetHeight : 0;
+                const rectTop = target.getBoundingClientRect().top + window.scrollY;
+                const scrollTo = Math.max(rectTop - headerHeight - 8, 0);
+                window.scrollTo({ top: scrollTo, behavior: 'smooth' });
+            }
+            });
+        });
+        }
+        
+
+        // ===== ビート音トグル =====
+        function initBeatToggle() {
+        const audio = document.getElementById('bgBeat');
+        const btn = document.getElementById('beatToggle');
+        const icon = document.getElementById('beatIcon');
+        if (!audio || !btn || !icon) return;
+
+        // 再生候補（assets/audio 内のファイル名）
+        const tracks = [
+            'assets/audio/Untitled.mp3',
+            'assets/audio/Untitled (1).mp3'
+        ];
+
+        let isPlaying = false;
+
+        function pickAndPlay() {
+            const idx = Math.floor(Math.random() * tracks.length);
+            const src = tracks[idx];
+            // 再設定して再生
+            if (audio.src !== src) {
+                audio.src = src;
+            }
+            audio.currentTime = 0;
+            audio.play().catch(err => {
+                // Autoplay が制限される場合に備え、エラーは無視
+                console.warn('bgBeat play failed', err);
+            });
+        }
+
+        btn.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                audio.currentTime = 0;
+                icon.textContent = '🔇';
+                btn.setAttribute('aria-pressed', 'false');
+            } else {
+                pickAndPlay();
+                icon.textContent = '🔊';
+                btn.setAttribute('aria-pressed', 'true');
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // ページ離脱時に音を止める（安全策）
+        window.addEventListener('beforeunload', () => {
+            try { audio.pause(); } catch(e) {}
+        });
+        }
+
+        // ===== 言語切り替え初期化 =====
+        function initLanguage() {
+        const select = document.getElementById('langSelect');
+        if (!select) return;
+
+        select.addEventListener('change', () => {
+            applyLanguage(select.value);
+        });
+
+        applyLanguage('ja');
+        }
+
+        // ===== FV キューブ（自動回転＋ドラッグ回転＋クリック発光） =====
+        function initCube() {
+    const cube = document.getElementById('cube');
+    if (!cube) return;
+
+    let rotationX = 20;
+    let rotationY = 30;
+    let dragging = false;
+    let lastX = 0, lastY = 0;
+
+    function updateCube() {
+        cube.style.transform =
+            `rotateX(${rotationX}deg) rotateY(${rotationY}deg)`;
+    }
+    updateCube();
+
+    // 自動回転
+    setInterval(() => {
+        if (!dragging) {
+            rotationY += 1;
+            rotationX += 0.3;
+            updateCube();
+        }
+    }, 30);
+
+    cube.addEventListener('mousedown', e => {
+        dragging = true;
+        lastX = e.clientX;
+        lastY = e.clientY;
+    });
+
+    window.addEventListener('mousemove', e => {
+        if (!dragging) return;
+        const dx = e.clientX - lastX;
+        const dy = e.clientY - lastY;
+        rotationY += dx * 0.3;
+        rotationX -= dy * 0.3;
+        updateCube();
+        lastX = e.clientX;
+        lastY = e.clientY;
+    });
+
+    window.addEventListener('mouseup', () => dragging = false);
+}
+
+
+        window.addEventListener('mouseup', () => dragging = false);
+        // クリックで発光エフェクト
+        document.addEventListener('DOMContentLoaded', () => {
+    initLanguage();
+    showNextNews();
+    setInterval(showNextNews, 12000);
+        
+    updateCountdown();
+    timer = setInterval(updateCountdown, 1000);
+
+    initFadeIn();
+    initHeaderScroll();
+    initMobileMenu();
+    initSmoothScroll();
+    initBeatToggle();
+
+    // --- ここを修正 ---
+    initCube();           // ← 後述の修正版を使用
+   initFlyingLights();    // ← 必須。ここで照明が動く
+    // ------------------
+
+    initBackToTop();
+});
+
+/* =========================================================
+    丸い光の粒子が漂うアニメーション
+   ========================================================= */
+function initFlyingLights() {
+    const canvas = document.getElementById("stageLightsCanvas");
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+
+    /* canvasリサイズ */
+    function resize() {
+        canvas.width = canvas.clientWidth;
+        canvas.height = canvas.clientHeight;
+    }
+    resize();
+    window.addEventListener("resize", resize);
+
+    /* 粒子設定 */
+    const particles = [];
+    const NUM = 12; // 12個くらいが最も美しい（多すぎない）
+
+    for (let i = 0; i < NUM; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            r: 40 + Math.random() * 50,      // 半径（柔らかい光の大きさ）
+            vx: (Math.random() * 0.6 - 0.3), // 横移動
+            vy: (Math.random() * 0.6 - 0.3), // 縦移動
+            alpha: 0.05 + Math.random() * 0.4,
+            alphaSpeed: (Math.random() * 0.006 - 0.003),
+            pulse: Math.random() * 2 * Math.PI // 呼吸演出
+        });
+    }
+
+    /* 粒子を描画 */
+    function drawParticle(p) {
+        const gradient = ctx.createRadialGradient(
+            p.x, p.y, 0,
+            p.x, p.y, p.r
+        );
+
+        gradient.addColorStop(0, `rgba(0,255,255,${p.alpha * 1.5})`);
+        gradient.addColorStop(0.4, `rgba(0,120,255,${p.alpha * 0.35})`);
+        gradient.addColorStop(1, `rgba(0,80,160,0)`);
+
+        ctx.beginPath();
+        ctx.fillStyle = gradient;
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+    }
+
+    /* アニメーション */
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        particles.forEach(p => {
+
+            /* 移動 */
+            p.x += p.vx * 0.8; // 少しゆっくり
+            p.y += p.vy * 0.8;
+
+            /* 壁で反転（ふわっと漂わせる） */
+            if (p.x < -100 || p.x > canvas.width + 100)  p.vx *= -1;
+            if (p.y < -100 || p.y > canvas.height + 100) p.vy *= -1;
+
+            /* アルファの呼吸 */
+            p.alpha += p.alphaSpeed;
+            if (p.alpha < 0.1 || p.alpha > 0.7) {
+                p.alphaSpeed *= -1;
+            }
+
+            /* 半径の呼吸（膨張収縮） */
+            p.pulse += 0.01;
+            p.r = 40 + (Math.sin(p.pulse) * 20);
+
+            /* 描画 */
+            drawParticle(p);
+        });
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+}
+
+        // ===== トップへ戻るボタン =====
+        function initBackToTop() {
+        const btn = document.getElementById('backToTop');
+        if (!btn) return;
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+            btn.classList.add('visible');
+            } else {
+            btn.classList.remove('visible');
+            }
+        });
+
+        btn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        }
+
+        // ===== DOMContentLoaded =====
+        document.addEventListener('DOMContentLoaded', () => {
+        // 言語・テキスト
+        initLanguage();
+
+        // ニュース
+        showNextNews();
+        setInterval(showNextNews, 12000);
+
+        // カウントダウン
+        updateCountdown();
+        timer = setInterval(updateCountdown, 1000);
+
+        // フェードイン
+        initFadeIn();
+
+        // ヘッダー、メニュー、スクロール
+        initHeaderScroll();
+        initMobileMenu();
+        initSmoothScroll();
+
+        // ビート音
+        initBeatToggle();
+
+        // --- BGM 継続状態の復元 ---
+        try {
+            const stored = localStorage.getItem('flashbeat_bgm_on');
+            // stored === '0' -> user previously turned BGM off
+            if (stored === '0') {
+                // do nothing (keep globalBGM paused)
+            } else {
+                // if stored === '1' or null (default), start global site BGM
+                const global = document.getElementById('globalBGM');
+                if (global) global.play().catch(()=>{});
+            }
+        } catch(e) { /* ignore storage errors */ }
+
+        // キューブ
+        initCube();
+
+        // 照明Canvas
+        initStageLights();
+
+
+        // トップへ戻る
+        initBackToTop();
+        });
+    </script>
+    <!-- 既存のBGM切り替えボタン・機能のみで制御。重複要素・スクリプトは削除済み -->
+        </script>
+        </body>
+        </html>
