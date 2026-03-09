@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KIRA☆NOVA | FLASH BEAT ARTISTS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1A1A40, #6D3BA0);
+      background-attachment: fixed;
+      background-size: cover;
+      color: #fff;
+      font-family: 'Noto Sans JP', 'Poppins', sans-serif;
+      text-align: center;
+      padding: 1.2rem;
+      max-width: 480px;
+      margin: 0 auto;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* ---- KIRA☆NOVA：縦に落ちるスターダストライン ---- */
+    body .stardust {
+      position: fixed;
+      top: -150px;
+      left: 0;
+      width: 100%;
+      height: 150%;
+      pointer-events: none;
+      z-index: 0;
+
+      background-image:
+        repeating-linear-gradient(
+          180deg,
+          rgba(255, 182, 255, 0.10) 0px,
+          rgba(255, 182, 255, 0.10) 2px,
+          transparent 2px,
+          transparent 80px
+        ),
+        repeating-linear-gradient(
+          180deg,
+          rgba(255, 156, 243, 0.08) 0px,
+          rgba(255, 156, 243, 0.08) 1px,
+          transparent 1px,
+          transparent 120px
+        );
+
+      animation: kirafall 22s linear infinite;
+      opacity: 0.35;
+    }
+
+    @keyframes kirafall {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(150px); }
+    }
+
+  #site-bgm-btn {
+    position: fixed; /* ←既存仕様そのまま維持 */
+    top: 18px;
+    right: 18px;
+    z-index: 2000;
+
+    /* KIRA専用のやわらかい星光グラデ */
+    background: linear-gradient(
+      135deg,
+      #ffe6ff,
+      #ffb6ff,
+      #ffcfff
+    );
+    color: #4a0050;
+
+    padding: 0.7em 1.6em;
+    font-size: 1.05em;
+    font-weight: bold;
+    border: none;
+    border-radius: 999px;
+
+    /* 奥行きと透明感のグロー */
+    box-shadow:
+      0 0 12px rgba(255, 180, 255, 0.55),
+      0 0 25px rgba(255, 160, 255, 0.35);
+
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.55em;
+
+    transition: transform 0.4s ease, filter 0.4s ease;
+  }
+
+  #site-bgm-btn:hover {
+    transform: scale(1.06);
+    box-shadow:
+      0 0 18px rgba(255, 220, 255, 0.85),
+      0 0 30px rgba(255, 190, 255, 0.45);
+    filter: brightness(1.08);
+  }
+
+    /* 星屑の粒子エフェクト */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(2px 2px at 20% 30%, white, transparent),
+        radial-gradient(2px 2px at 60% 70%, #ffb6ff, transparent),
+        radial-gradient(1px 1px at 50% 50%, white, transparent),
+        radial-gradient(1px 1px at 80% 10%, #ffe6ff, transparent),
+        radial-gradient(2px 2px at 90% 60%, white, transparent),
+        radial-gradient(1px 1px at 33% 80%, #ffb6ff, transparent),
+        radial-gradient(1px 1px at 15% 90%, white, transparent);
+      background-size: 200% 200%;
+      background-position: 
+        0% 0%, 10% 10%, 20% 20%, 30% 30%, 
+        40% 40%, 50% 50%, 60% 60%;
+      opacity: 0.4;
+      animation: twinkle 8s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.6; }
+    }
+
+    /* ---- KIRA☆NOVA：星雲の流れるレイヤー ---- */
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -3;
+
+      background: radial-gradient(
+          circle at 30% 50%,
+          rgba(255, 182, 255, 0.15),
+          transparent 60%
+        ),
+        radial-gradient(
+          circle at 70% 60%,
+          rgba(255, 156, 243, 0.1),
+          transparent 70%
+        );
+
+      animation: kiranovaNebula 28s linear infinite;
+      opacity: 0.32;
+    }
+
+    @keyframes kiranovaNebula {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+
+    .container {
+      position: relative;
+      z-index: 1;
+      animation: fadeIn 1s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ---- 下部の星明かりグラデーション（独立レイヤー） ---- */
+    .kira-bottom-glow {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 220px;
+      pointer-events: none;
+      z-index: -1;
+
+      background: radial-gradient(
+        circle at bottom center,
+        rgba(255, 200, 255, 0.38) 0%,
+        rgba(255, 160, 255, 0.20) 40%,
+        transparent 80%
+      );
+
+      animation: kiraBottomGlow 9s ease-in-out infinite;
+      opacity: 0.65;
+    }
+
+
+    /* ---- KIRA☆NOVA：フェザーグロウ（光の薄膜） ---- */
+    .kira-feather {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+
+      background: radial-gradient(
+        circle at 50% 30%,
+        rgba(255, 230, 255, 0.15) 0%,
+        rgba(255, 200, 255, 0.05) 40%,
+        transparent 100%
+      );
+      animation: kiraFeatherGlow 12s ease-in-out infinite;
+    }
+
+    @keyframes kiraFeatherGlow {
+      0%,100% { opacity: 0.55; }
+      50% { opacity: 0.75; }
+    }
+
+    /* ---- KIRA☆NOVA：ランダム瞬き星粒子レイヤー ---- */
+    .twinkle-layer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .twinkle-star {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: rgba(255, 230, 255, 0.9);
+      opacity: 0;
+      animation: twinkleStarAnim 4s ease-in-out infinite;
+      filter: drop-shadow(0 0 6px rgba(255, 200, 255, 0.6));
+    }
+
+    @keyframes twinkleStarAnim {
+      0% { opacity: 0; transform: scale(0.4); }
+      20% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.8; }
+      80% { opacity: 1; transform: scale(0.7); }
+      100% { opacity: 0; transform: scale(0.4); }
+    }
+
+    /* ヘッダー */
+    header {
+      text-align: left;
+      margin-bottom: 1.5rem;
+      animation: slideDown 0.8s ease-out;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    header a {
+      color: #fff;
+      font-size: 1rem;
+      text-decoration: none;
+      opacity: 0.9;
+      transition: opacity 0.3s ease;
+      display: inline-block;
+    }
+
+    header a:hover {
+      opacity: 0.7;
+    }
+
+    /* メインビジュアル */
+    .artist-image {
+      width: 90%;
+      margin: 1rem auto 2rem;
+      display: block;
+      border-radius: 0;
+
+      /* 画像下の“星雲の光の輪” */
+      filter: drop-shadow(0 0 18px rgba(255, 200, 255, 0.35))
+              drop-shadow(0 0 32px rgba(255, 150, 255, 0.25));
+
+      box-shadow:
+        0 0 28px rgba(255, 186, 255, 0.25),
+        0 0 50px rgba(255, 180, 255, 0.20),
+        0 10px 40px rgba(0, 0, 0, 0.35);
+
+      animation: floatImage 6s ease-in-out infinite, 
+                kiraGlow 5s ease-in-out infinite;
+      transition: filter 0.3s ease;
+    }
+
+    /* 柔らかく呼吸するような光 */
+    @keyframes kiraGlow {
+      0%, 100% {
+        filter: drop-shadow(0 0 18px rgba(255, 200, 255, 0.35))
+                drop-shadow(0 0 32px rgba(255, 150, 255, 0.25));
+      }
+      50% {
+        filter: drop-shadow(0 0 26px rgba(255, 220, 255, 0.45))
+                drop-shadow(0 0 40px rgba(255, 170, 255, 0.35));
+      }
+    }
+
+    /* ホバーで少し輝きが増す */
+    .artist-image:hover {
+      filter: brightness(1.04)
+              drop-shadow(0 0 40px rgba(255, 200, 255, 0.55));
+    }
+
+
+        /* アーティスト名 */
+        .artist-name h1 {
+          font-size: 1.9rem;
+          font-weight: 900;
+          letter-spacing: 0.10em;
+          margin-bottom: 0.4rem;
+
+          /* 銀河系の優しいグラデーション */
+          background: linear-gradient(
+            90deg,
+            #ffffff 0%,
+            #ffe6ff 35%,
+            #ffb6ff 70%,
+            #ffd9ff 100%
+          );
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+
+          /* 奥行きのある光 */
+          filter: drop-shadow(0 0 10px rgba(255, 215, 255, 0.45))
+                  drop-shadow(0 0 20px rgba(255, 180, 255, 0.25));
+
+          animation: kiraTitleGlow 6s ease-in-out infinite;
+        }
+
+        /* 柔らかい発光アニメーション */
+        @keyframes kiraTitleGlow {
+          0%, 100% {
+            filter: drop-shadow(0 0 10px rgba(255, 215, 255, 0.45))
+                    drop-shadow(0 0 20px rgba(255, 180, 255, 0.25));
+          }
+          50% {
+            filter: drop-shadow(0 0 16px rgba(255, 235, 255, 0.70))
+                    drop-shadow(0 0 32px rgba(255, 180, 255, 0.40));
+          }
+        }
+
+        .artist-name::after {
+          content: "";
+          display: block;
+          width: 60%;
+          height: 6px;
+          margin: 0.4rem auto 0;
+          border-radius: 999px;
+          background: radial-gradient(
+            circle,
+            rgba(255, 180, 255, 0.6) 0%,
+            rgba(255, 180, 255, 0.15) 60%,
+            transparent 100%
+          );
+          animation: kiraUnderline 6s ease-in-out infinite;
+        }
+
+        @keyframes kiraUnderline {
+          0%,100% { opacity: 0.35; transform: scale(1); }
+          50% { opacity: 0.75; transform: scale(1.1); }
+        }
+
+
+    /* キャッチコピー */
+    .catch {
+      font-size: 1.12rem;
+      color: #ffeaff;
+      margin: 1.8rem auto 2.2rem;
+      line-height: 1.9;
+      text-align: center;
+
+      /* 優しい星明かりのような光 */
+      text-shadow:
+        0 0 6px rgba(255, 200, 255, 0.35),
+        0 0 18px rgba(255, 170, 255, 0.25);
+
+      animation: kiraCatchGlow 5.5s ease-in-out infinite;
+    }
+
+    @keyframes kiraCatchGlow {
+      0%, 100% {
+        text-shadow:
+          0 0 6px rgba(255, 200, 255, 0.35),
+          0 0 18px rgba(255, 170, 255, 0.25);
+      }
+      50% {
+        text-shadow:
+          0 0 12px rgba(255, 230, 255, 0.55),
+          0 0 28px rgba(255, 180, 255, 0.45);
+      }
+    }
+
+    /* セクション */
+    .section {
+      margin: 2rem auto;
+      text-align: left;
+      max-width: 90%;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .section {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: all 1s ease-out;
+    }
+
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+
+    .section h2 {
+      font-size: 1.15rem;
+      color: #fff;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.8rem;
+      text-shadow: 
+        0 0 6px rgba(255, 180, 255, 0.45),
+        0 0 12px rgba(255, 150, 255, 0.35);
+      text-align: center;
+    }
+
+
+    .section p {
+      font-size: 0.92rem;
+      line-height: 1.9;
+      color: rgba(255, 240, 255, 0.92);
+      text-shadow: 0 0 6px rgba(255, 200, 255, 0.18);
+      text-align: center;
+    }
+
+    .section::before {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 1px;
+      margin: 2rem 0 1.2rem;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 200, 255, 0.45),
+        rgba(255, 150, 255, 0.35),
+        transparent
+      );
+    }
+
+    /* ---- KIRA☆NOVA：星のチケット風カード ---- */
+    .kira-ticket {
+      margin-top: 2.5rem;
+      padding: 1.4rem 1rem 1.2rem;
+
+      background: rgba(255, 240, 255, 0.12);
+      border-radius: 14px;
+      border: 1px solid rgba(255, 200, 255, 0.45);
+
+      box-shadow:
+        0 0 18px rgba(255, 200, 255, 0.35),
+        0 0 32px rgba(255, 150, 255, 0.20);
+
+      text-align: center;
+      backdrop-filter: blur(4px);
+      position: relative;
+    }
+
+    /* 左右に星の輝きフレア */
+    .kira-ticket::before,
+    .kira-ticket::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 20px;
+      height: 20px;
+      background: radial-gradient(
+        circle,
+        rgba(255, 200, 255, 0.8) 0%,
+        rgba(255, 150, 255, 0.3) 60%,
+        transparent 100%
+      );
+      border-radius: 50%;
+      transform: translateY(-50%);
+      animation: kiraTicketTwinkle 4s ease-in-out infinite;
+    }
+
+    .kira-ticket::before {
+      left: -10px;
+    }
+    .kira-ticket::after {
+      right: -10px;
+    }
+
+    @keyframes kiraTicketTwinkle {
+      0%,100% { opacity: 0.45; transform: scale(1) translateY(-50%); }
+      50% { opacity: 0.9; transform: scale(1.3) translateY(-50%); }
+    }
+
+    /* SNSセクション */
+    .social-section {
+      margin-top: 3rem;
+      animation: fadeInUp 0.8s ease-out 0.6s both;
+    }
+
+    .social-section h2 {
+      text-align: center;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .social-links a {
+      display: inline-block;
+      transition: all 0.4s ease;
+    }
+
+    .social-links img {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+
+      transition: all 0.35s ease;
+      filter: drop-shadow(0 0 6px rgba(255, 180, 255, 0.35));
+    }
+
+    .social-links img:hover {
+      transform: scale(1.15);
+      filter: drop-shadow(0 0 12px rgba(255, 180, 255, 0.6));
+    }
+
+
+
+    .social-links a:hover img {
+      transform: scale(1.15);
+      filter: drop-shadow(0 0 12px #ffb6ff);
+    }
+
+    /* ---- 最下部に現れる星の反射層 ---- */
+    .kira-final-glow {
+      position: fixed;
+      bottom: -80px;
+      left: 50%;
+      width: 200px;
+      height: 200px;
+      margin-left: -100px;
+      pointer-events: none;
+      opacity: 0;
+      z-index: 0;
+
+      background: radial-gradient(
+        circle,
+        rgba(255, 220, 255, 0.55) 0%,
+        rgba(255, 160, 255, 0.25) 35%,
+        transparent 80%
+      );
+      filter: blur(10px);
+      transition: opacity 1.4s ease-out;
+    }
+
+
+    /* ホバーで色を変える（アクセス性のためフォーカス時も同様） */
+    .back-link-top:hover,
+    .back-link-top:focus {
+      color: #ffb6ff; /* KIRA 専用ピンク */
+      opacity: 1;
+      text-decoration: underline;
+}
+
+    /* ---- KIRA：語りかけるようなフェードアニメ ---- */
+    .cta-next-kira {
+      margin-top: 3rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      color: #ffeaff;
+    }
+
+    .kira-line {
+      font-size: 1.12rem;
+      opacity: 0;
+      animation: kiraSpeak 4s ease forwards;
+      animation-delay: 0.8s;
+      text-shadow: 
+        0 0 12px rgba(255,200,255,0.45),
+        0 0 24px rgba(255,170,255,0.25);
+    }
+
+    @keyframes kiraSpeak {
+      0% { opacity: 0; transform: translateY(10px); }
+      35% { opacity: 1; transform: translateY(0); }
+      55% { opacity: 0.9; }
+      100% { opacity: 1; }
+    }
+
+    .cta-date-kira {
+      font-size: 1.05rem;
+      margin-top: 0.6rem;
+      opacity: 0;
+      animation: kiraDateFade 3.5s ease forwards;
+      animation-delay: 1.7s;
+      color: #ffdfff;
+      text-shadow:
+        0 0 14px rgba(255,180,255,0.4),
+        0 0 24px rgba(255,160,255,0.3);
+    }
+
+    @keyframes kiraDateFade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+
+
+    /* 戻るリンク */
+    .back-home {
+      display: inline-block;
+      color: #fff;
+      font-size: 1rem;
+      margin-top: 3rem;
+      margin-bottom: 2rem;
+      opacity: 0.8;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .back-home:hover {
+      opacity: 1;
+      text-shadow: 0 0 8px rgba(255, 182, 255, 0.6);
+    }
+
+    /* レスポンシブ調整 */
+    @media (max-width: 390px) {
+      body {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+      }
+
+      .catch {
+        font-size: 1rem;
+      }
+
+      h2 {
+        font-size: 1rem;
+      }
+
+      p {
+        font-size: 0.85rem;
+      }
+    }
+
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .catch {
+        font-size: 1.2rem;
+      }
+
+      h2 {
+        font-size: 1.25rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+    }
+
+    /* ---- KIRA：流れ星（CTAへ向かって落ちる軌跡） ---- */
+    .kira-shooting-stars {
+      position: fixed;
+      top: -40%;
+      left: -20%;
+      width: 200%;
+      height: 200%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .kira-shooting-stars::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 140px;
+      height: 3px;
+      border-radius: 2px;
+      background: linear-gradient(
+        to right,
+        rgba(255,240,255,0.9),
+        rgba(255,180,255,0.4),
+        transparent
+      );
+      transform: rotate(35deg);
+      opacity: 0;
+      animation: kiraStarShoot 7s infinite ease-in-out;
+    }
+
+    @keyframes kiraStarShoot {
+      0% { opacity: 0; transform: translate(-50px,-40px) rotate(35deg); }
+      6% { opacity: 1; transform: translate(120px,120px) rotate(35deg); }
+      12% { opacity: 0; transform: translate(180px,200px) rotate(35deg); }
+      100% { opacity: 0; }
+    }
+
+
+  </style>
+    </head>
+  <body>
+    <div class="stardust"></div>
+    <div class="twinkle-layer"></div>
+    <div class="kira-feather"></div>
+    <div class="kira-bottom-glow"></div>
+
+
+
+
+  <!-- サイト専用BGM（ファイルパスは任意で差し替え可） -->
+  <audio id="siteBGM" src="./assets/KIRA☆NOVA（キラ・ノヴァ）/Untitled (2).mp3" loop preload="auto"></audio>
+  <button id="site-bgm-btn" type="button"><span id="site-bgm-ico">🔊</span>BGM</button>
+  <div class="container">
+    <!-- ヘッダー -->
+    <header>
+      <a href="./index.html">ホームに戻る</a>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main>
+      <!-- メインビジュアル -->
+      <img src="./images/KIRA☆NOVA（キラ・ノヴァ）.jpg" alt="KIRA☆NOVA ステージビジュアル" class="artist-image">
+
+      <!-- アーティスト名 -->
+      <div class="artist-name">
+        <h1>KIRA☆NOVA</h1>
+        <p class="artist-name-jp">（キラ・ノヴァ）</p>
+      </div>
+
+      <!-- キャッチコピー -->
+      <p class="catch">
+        星の瞬きが、あなたの心を灯す。
+      </p>
+
+      <!-- アーティスト紹介 -->
+      <section class="section">
+        <h2>アーティスト紹介</h2>
+        <p>
+          仮想空間から生まれたバーチャルポップアイドル。<br>
+          星屑をまとったステージと透明感ある歌声で、<br>
+          聴く人の心にきらめきを灯す。
+        </p>
+      </section>
+
+      <!-- 出演情報 -->
+      <section class="section performance-info kira-ticket">
+        <h2>出演情報</h2>
+        <p>出演予定：8月10日（土）18:00〜</p>
+      </section>
+
+
+      <!-- SNSセクション -->
+      <section class="social-section">
+        <h2>FOLLOW US</h2>
+        <div class="social-links">
+          <a href="#" aria-label="X (Twitter)">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z'/%3E%3C/svg%3E" alt="X">
+          </a>
+          <a href="#" aria-label="Instagram">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='url(%23ig-gradient)'%3E%3Cdefs%3E%3ClinearGradient id='ig-gradient' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23f58529'/%3E%3Cstop offset='50%25' style='stop-color:%23dd2a7b'/%3E%3Cstop offset='100%25' style='stop-color:%238134af'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z'/%3E%3C/svg%3E" alt="Instagram">
+          </a>
+          <a href="#" aria-label="TikTok">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z'/%3E%3C/svg%3E" alt="TikTok">
+          </a>
+        </div>
+      </section>
+
+      <div class="kira-final-glow"></div>
+
+      <div class="cta-next">
+        <p>皆さんに会える日がとても楽しみです。<br>ステージでお待ちしてます！</p>
+        <p class="cta-date">8月10日（土）</p>
+      </div>
+
+
+      <!-- 戻るリンク -->
+      <a href="./index.html" class="back-home">ホームに戻る</a>
+    </main>
+  </div>
+
+  <div class="kira-shooting-stars"></div>
+
+
+  <script>
+    // 画像エラー時のフォールバック
+    const artistImage = document.querySelector('.artist-image');
+    artistImage.addEventListener('error', function() {
+      this.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500"%3E%3Crect fill="%236D3BA0" width="400" height="500"/%3E%3Ctext x="50%25" y="50%25" fill="white" font-family="sans-serif" font-size="24" text-anchor="middle" dominant-baseline="middle"%3EKIRA%E2%98%86NOVA%3C/text%3E%3C/svg%3E';
+    });
+
+    // スクロールアニメーション（オプション）
+  /* ----------------------------------------
+    STEP C：セクションアニメーション統一（KIRA / NEON 共通）
+    IntersectionObserver で登場演出を制御
+  ----------------------------------------- */
+
+  const sections = document.querySelectorAll('.section');
+
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  sections.forEach(sec => sectionObserver.observe(sec));
+
+  
+    /* ---- ランダム瞬き星を生成 ---- */
+  const twinkleLayer = document.querySelector('.twinkle-layer');
+
+  function createTwinkleStar() {
+    const star = document.createElement('div');
+    star.classList.add('twinkle-star');
+
+    const size = Math.random() * 3 + 2;
+    star.style.width = `${size}px`;
+    star.style.height = `${size}px`;
+
+    star.style.top = `${Math.random() * 100}%`;
+    star.style.left = `${Math.random() * 100}%`;
+
+    star.style.animationDuration = `${3 + Math.random() * 4}s`;
+    star.style.animationDelay = `${Math.random() * 3}s`;
+
+    twinkleLayer.appendChild(star);
+
+    setTimeout(() => {
+      star.remove();
+    }, 7000);
+  }
+
+  // 常時ランダム生成
+  setInterval(createTwinkleStar, 450);
+
+
+    // サイト専用BGMページ内再生＆ON/OFF UI
+    const siteBgmAudio = document.getElementById('siteBGM');
+    const siteBgmBtn = document.getElementById('site-bgm-btn');
+    const siteBgmIco = document.getElementById('site-bgm-ico');
+    let siteBgmPlaying = true;
+    siteBgmAudio.volume = 0.45;
+    // ページ初回ロード時に自動再生
+    window.addEventListener('DOMContentLoaded', () => {
+      siteBgmAudio.play().catch(()=>{});
+      siteBgmBtn.setAttribute('aria-pressed', 'true');
+      siteBgmIco.textContent = '🔊';
+    });
+    // ON/OFF切り替え
+    siteBgmBtn.onclick = function() {
+      if (siteBgmPlaying) {
+        siteBgmAudio.pause();
+        siteBgmIco.textContent = '🔇';
+        siteBgmBtn.setAttribute('aria-pressed', 'false');
+      } else {
+        siteBgmAudio.currentTime = 0;
+        siteBgmAudio.play().catch(()=>{});
+        siteBgmIco.textContent = '🔊';
+        siteBgmBtn.setAttribute('aria-pressed', 'true');
+      }
+      siteBgmPlaying = !siteBgmPlaying;
+    };
+    // ページ離脱時はBGM自動停止
+    window.addEventListener('beforeunload', () => { try { siteBgmAudio.pause(); } catch(e){} });
+
+    // セクションのふわっと表示
+    const kiraSections = document.querySelectorAll('.section');
+    const kiraObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    kiraSections.forEach(sec => kiraObserver.observe(sec));
+
+    // ---- スクロール終端で星の反射層を表示 ----
+    const finalGlow = document.querySelector('.kira-final-glow');
+
+    window.addEventListener('scroll', () => {
+      const scrollPos = window.scrollY + window.innerHeight;
+      const pageHeight = document.body.scrollHeight;
+
+      // ページ終端に近づいたら表示
+      if (scrollPos >= pageHeight - 80) {
+        finalGlow.style.opacity = 1;
+      } else {
+        finalGlow.style.opacity = 0;
+      }
+    });
+
+
+  </script>
+    </body>
+</html>

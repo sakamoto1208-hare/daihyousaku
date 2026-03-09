@@ -1,0 +1,545 @@
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: 'Poppins', 'Noto Sans JP', sans-serif;
+        color: #fff;
+        background: linear-gradient(-45deg, #3B246B, #0E0E22, #2A297A, #171717);
+        background-size: 400% 400%;
+        animation: gradientShift 20s ease infinite, fadeIn 1.2s ease-out forwards;
+        opacity: 0;
+        transform: translateY(10px);
+        overflow-x: hidden;
+    }
+
+    /* Background animation */
+    @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    @keyframes fadeIn {
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* =========================================================
+    HEADER
+    ========================================================= */
+    header {
+        position: sticky !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background: rgba(14, 14, 34, 0.8);
+        backdrop-filter: blur(10px);
+        padding: 1rem 2rem;
+        transition: 0.3s ease;
+        border-bottom: 2px solid rgba(255, 94, 201, 0.3);
+    }
+
+    header.scrolled {
+        background: rgba(14, 14, 34, 0.95);
+    }
+
+    .header-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .logo {
+        font-size: 2rem;
+        font-weight: 900;
+        background: linear-gradient(90deg, #ff5ec9, #00ffff, #ff5ec9);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-shadow: 0 0 20px rgba(255, 94, 201, 0.5);
+        letter-spacing: 2px;
+        white-space: nowrap;
+    }
+
+    /* NAV */
+    nav ul {
+        display: flex;
+        gap: 2.5rem;
+        list-style: none;
+    }
+
+    nav a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        position: relative;
+        cursor: pointer;
+    }
+
+    nav a::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #ff5ec9;
+        transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+        width: 100%;
+    }
+
+    /* =========================================================
+    COUNTDOWN
+    ========================================================= */
+    .header-right {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .countdown-box {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-size: 0.9rem;
+        color: #00ffff;
+        font-weight: 600;
+    }
+
+    .countdown {
+        display: flex;
+        gap: 0.4rem;
+        align-items: center;
+    }
+
+    .countdown-label {
+        font-size: 0.9rem;
+        color: #00ffff;
+    }
+
+    .ticket-btn {
+        padding: 0.8rem 1.6rem;
+        background: linear-gradient(135deg, #ff5ec9, #00ffff);
+        border: none;
+        border-radius: 50px;
+        color: #000;
+        font-weight: 700;
+        cursor: pointer;
+        animation: glowPulse 2.5s ease-in-out infinite;
+        display: inline-block;
+        white-space: nowrap;
+    }
+
+    @keyframes glowPulse {
+        0%, 100% { box-shadow: 0 0 10px #ff5ec9; opacity: 1; }
+        50% { box-shadow: 0 0 25px #fff; opacity: 0.85; }
+    }
+
+    /* =========================================================
+    HAMBURGER MENU
+    ========================================================= */
+    .hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+    }
+
+    .hamburger span {
+        width: 30px;
+        height: 3px;
+        background: #fff;
+        transition: all 0.3s ease;
+    }
+
+    /* MOBILE MENU */
+    .mobile-menu {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 280px;
+        height: 100vh;
+        background: rgba(14, 14, 34, 0.98);
+        backdrop-filter: blur(20px);
+        transition: left 0.4s ease;
+        z-index: 2000;
+        padding: 2rem;
+    }
+
+    .mobile-menu.active {
+        left: 0;
+    }
+
+    .mobile-menu ul {
+        list-style: none;
+        margin-top: 3rem;
+    }
+
+    .mobile-menu li {
+        margin-bottom: 2rem;
+    }
+
+    .mobile-menu a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 1.3rem;
+        font-weight: 600;
+    }
+
+    .close-btn {
+        font-size: 2rem;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    /* =========================================================
+    MAIN CONTENT
+    ========================================================= */
+    main {
+        margin-top: 20px;
+        padding: 2rem;
+        max-width: 1400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* =========================================================
+    HERO / FV
+    ========================================================= */
+    .hero {
+        background-image: url('./images/FV1_D.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-blend-mode: overlay;
+        background-color: rgba(0,0,0,0.45);
+        text-align: center;
+        padding: 8rem 0 5rem;
+        position: relative;
+    }
+
+        #stageLightsCanvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1; /* キューブの背面、背景の上 */
+        }
+
+
+    /* flowing background text */
+    .animation-container {
+        width: 100%;
+        height: 300px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .hero-text {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hero-text h1 {
+        position: absolute;
+        right: -15%;
+        top: 50%;
+        transform: translateY(-50%) rotate(-8deg);
+        white-space: nowrap;
+        font-weight: 900;
+        font-size: clamp(4rem, 9vw, 8rem);
+        color: rgba(255,255,255,0.12);
+        animation: flowRightToLeft 12s linear infinite;
+        background: linear-gradient(90deg, #ff5ec9, #00ffff, #ff5ec9);
+        -webkit-text-fill-color: transparent;
+    }
+
+    .hero-text h1:nth-child(2) {
+        animation-delay: 3s;
+    }
+
+    .hero-text h1:nth-child(3) {
+        animation-delay: 6s;
+    }
+
+    @keyframes flowRightToLeft {
+        0% { transform: translateX(120%) translateY(-50%) rotate(-8deg); opacity: 0; }
+        10% { opacity: 0.12; }
+        50% { transform: translateX(-20%) translateY(-50%) rotate(-8deg); opacity: 0.14; }
+        90% { opacity: 0.10; }
+        100% { transform: translateX(-200%) translateY(-50%) rotate(-8deg); opacity: 0; }
+    }
+
+    /* =========================================================
+    CUBE SECTION
+    ========================================================= */
+    #cubeCanvas {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        transform: translate(-50%, -50%);
+        pointer-events: none; /* ← キューブ操作を防がないように */
+        }
+
+    /* =========================================================
+    NEWS BAR
+    ========================================================= */
+    .news-bar {
+        background: rgba(255, 94, 201, 0.1);
+        border: 2px solid rgba(255, 94, 201, 0.3);
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin: 2rem 0;
+        animation: slideUp 0.8s ease-out;
+    }
+
+    @keyframes slideUp {
+        from { transform: translateY(30px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+
+    .news-item {
+        animation: tickerScroll 12s linear infinite;
+    }
+
+    @keyframes tickerScroll {
+        0% { right: -100%; opacity: 0; }
+        100% { right: 100%; opacity: 0; }
+    }
+
+    /* =========================================================
+    FEATURED ARTISTS
+    ========================================================= */
+    .featured-artists {
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+    }
+
+    .featured-card {
+        position: relative;
+        height: 400px;
+        border-radius: 20px;
+        transition: 0.3s;
+        border: 3px solid rgba(255,94,201,0.35);
+    }
+
+    .featured-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(255,94,201,0.4);
+    }
+
+    .featured-info {
+        position: absolute;
+        bottom: 0;
+        padding: 2rem;
+        background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    }
+
+    /* =========================================================
+    ARTIST LIST & PANEL
+    ========================================================= */
+    .artist-grid {
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    }
+
+    .artist-card {
+        background: rgba(255,255,255,0.05);
+        border: 2px solid rgba(255,94,201,0.3);
+        border-radius: 20px;
+        padding: 2rem;
+        position: relative;
+        transition: 0.3s;
+    }
+
+    .artist-card:hover {
+        transform: scale(1.03);
+        box-shadow: 0 0 15px rgba(255,0,255,0.5);
+    }
+
+    .artist-panel {
+        position: absolute;
+        left: 110%;
+        top: 50%;
+        transform: translateY(-50%) translateX(0);
+        width: 260px;
+        background: rgba(14,14,34,0.95);
+        border: 2px solid #ff5ec9;
+        padding: 1.5rem;
+        border-radius: 16px;
+        opacity: 0;
+        pointer-events: none;
+        /* フェード（opacity）を無効化：表示は即時。transformのみトランジションを残す。 */
+        transition: transform 0.15s ease;
+        z-index: 20;
+        text-align: left;
+        font-size: 0.85rem;
+    }
+
+    /* デフォルトはホバー時に表示（右側にスライドして表示） */
+    .artist-card:hover .artist-panel {
+        opacity: 1;
+        transform: translateY(-50%) translateX(10px);
+        pointer-events: auto;
+    }
+
+    .artist-card.fade-in.visible:hover .artist-panel {
+        opacity: 1;
+        transform: translateY(-50%) translateX(10px);
+    }
+
+    /* =========================================================
+    TIMETABLE
+    ========================================================= */
+    .timetable {
+        background: rgba(255,255,255,0.05);
+        border-radius: 20px;
+        padding: 2rem;
+    }
+
+    .timetable-item {
+        display: flex;
+        padding: 1.5rem;
+        background: rgba(42,41,122,0.5);
+        border-left: 4px solid #00ffff;
+        margin-bottom: 1rem;
+        transition: 0.3s;
+    }
+
+    /* Artist glow effects */
+    .timetable-item[data-artist="LUMINA VIBE"]:hover {
+        box-shadow: 0 0 30px #00ffff;
+        border-left-color: #00ffff;
+    }
+
+    /* =========================================================
+    TICKET VIDEO FRAME
+    ========================================================= */
+    .ticket-video-frame {
+        position: relative;
+        border: 3px solid rgba(255,94,201,0.35);
+        border-radius: 20px;
+        height: 420px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .ticket-video-frame::before {
+        content: "🎥 LIVE VIDEO";
+        position: absolute;
+        font-size: 2rem;
+        font-weight: 800;
+        color: rgba(255,255,255,0.7);
+        animation: glowTicket 2.5s infinite alternate;
+    }
+
+    @keyframes glowTicket {
+        0% { text-shadow: 0 0 10px #ff5ec9; opacity: 0.6; }
+        100% { text-shadow: 0 0 25px #fff; opacity: 1; }
+    }
+
+    /* =========================================================
+    LANGUAGE SWITCHER
+    ========================================================= */
+    .lang-switcher {
+        display: flex;
+        gap: 0.4rem;
+        padding: 0.3rem 0.7rem;
+        background: rgba(0,0,0,0.4);
+        border-radius: 999px;
+    }
+
+    #langSelect {
+        background: transparent;
+        color: #fff;
+        border: none;
+    }
+
+    /* =========================================================
+    BACK-TO-TOP
+    ========================================================= */
+    .back-to-top {
+        position: fixed;
+        right: 1.5rem;
+        bottom: 1.5rem;
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 50%;
+        background: linear-gradient(135deg,#ff5ec9,#00ffff);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: 0.3s;
+        box-shadow: 0 0 20px rgba(0,255,255,0.4);
+    }
+
+    .back-to-top.visible {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    /* =========================================================
+    RESPONSIVE
+    ========================================================= */
+    @media (max-width: 768px) {
+        .hamburger { display: flex; }
+        nav ul { display: none; }
+        .artist-grid { grid-template-columns: 1fr; }
+        .featured-artists { grid-template-columns: 1fr; }
+
+        /* 最新版 artist panel 固定位置（モバイル） */
+        .artist-panel {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) scale(0.98);
+            width: min(90%, 320px);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .artist-card.fade-in.visible:hover .artist-panel,
+        .artist-card:hover .artist-panel {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+            pointer-events: auto;
+        }
+    }
+
+    /* =========================================================
+    REDUCED MOTION
+    ========================================================= */
+    @media (prefers-reduced-motion: reduce) {
+        .hero-text h1 {
+            animation: none !important;
+            opacity: 0.5;
+            transform: none;
+            position: static;
+        }
+    }
